@@ -5,10 +5,10 @@
 function getDB() {
     static $pdo = null;
     if ($pdo === null) {
-        $host = 'localhost';
-        $db   = 'resume_analyzer';
-        $user = 'root';
-        $pass = '';
+        $host = defined('DB_HOST') ? DB_HOST : 'localhost';
+        $db   = defined('DB_NAME') ? DB_NAME : 'resume_analyzer';
+        $user = defined('DB_USER') ? DB_USER : 'root';
+        $pass = defined('DB_PASS') ? DB_PASS : '';
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
