@@ -4,6 +4,18 @@
 
 require_once __DIR__ . '/auth.php';
 
+// Handle logout request
+if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+    $wasAdmin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
+    logout();
+    if ($wasAdmin) {
+        header("Location: admin_login.php");
+    } else {
+        header("Location: login.php");
+    }
+    exit;
+}
+
 if (isLoggedIn()) {
     header("Location: dashboard.php");
     exit;
