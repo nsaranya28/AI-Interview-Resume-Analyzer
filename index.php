@@ -15,7 +15,7 @@ $user_name = getCurrentUserName();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Interview & Resume Analyzer - Create your Resume with an AI-powered CV maker</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Optimize your resume for ATS algorithms, identify crucial skill gaps, and practice interactive, AI-tailored mock interviews generated from your experience.">
+    <meta name="description" content="Optimize your resume for ATS algorithms, identify crucial skill gaps, and get AI-generated custom interview preparation questions tailored to your experience.">
     
     <!-- Custom styling to replicate the specific high-fidelity BetterCV landing page UI -->
     <style>
@@ -622,7 +622,7 @@ $user_name = getCurrentUserName();
                     </h1>
                     
                     <p class="better-desc">
-                        The first step to a better job? A perfect resume. Only 2% of resumes win ATS screening, and yours will be one of them. Scan, identify skill gaps, and practice live interviews tailored to your experience now!
+                        The first step to a better job? A perfect resume. Only 2% of resumes win ATS screening, and yours will be one of them. Scan, identify skill gaps, and prepare for interviews with questions tailored to your experience now!
                     </p>
                     
                     <div class="better-buttons">
@@ -762,8 +762,8 @@ $user_name = getCurrentUserName();
                 <div class="feature-icon-box" style="background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.15); color: #6366f1;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 </div>
-                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">Interactive AI Mock Chats</h3>
-                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">Generates technical and behavioral questions specific to your work history. Conducts a fully interactive mock chat interview with real-time feedback scoring.</p>
+                <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">AI Interview Prep Questions</h3>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 0;">Generates technical and behavioral preparation questions specific to your target role and work history to guide your practice.</p>
             </div>
         </div>
     </main>
@@ -773,7 +773,7 @@ $user_name = getCurrentUserName();
         <div class="section-title-wrapper">
             <span class="section-tag">Intuitive Flow</span>
             <h2 class="section-title" id="how-it-works-heading" style="font-size: 34px;">Four Easy Steps to Mastery</h2>
-            <p>Go from candidate profile creation to mock interview feedback in less than five minutes.</p>
+            <p>Go from candidate profile creation to custom interview preparation questions in less than five minutes.</p>
         </div>
 
         <div class="steps-container">
@@ -801,8 +801,8 @@ $user_name = getCurrentUserName();
             <!-- Step 4 -->
             <div class="step-item" id="step-chat">
                 <span class="step-number">4</span>
-                <h4 style="font-size: 16px; font-weight: 800; margin-top: 10px;">Simulate Live Chat</h4>
-                <p style="color: var(--text-muted);">Answer custom interview questions and receive instantaneous, constructive grading.</p>
+                <h4 style="font-size: 16px; font-weight: 800; margin-top: 10px;">Get Study Questions</h4>
+                <p style="color: var(--text-muted);">Review custom behavioral and technical interview questions curated directly from your experience.</p>
             </div>
         </div>
     </section>

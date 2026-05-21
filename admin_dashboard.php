@@ -64,21 +64,9 @@ if ($selectedResumeId) {
 }
 
 $analysisData = null;
-$interviewTranscripts = [];
 
 if ($selectedResume) {
     $analysisData = json_decode($selectedResume['analysis_result'], true);
-    
-    // Fetch completed mock interview transcripts
-    $stmtInt = $db->prepare("
-        SELECT q.question, a.user_answer, a.score, a.feedback 
-        FROM interview_questions q
-        JOIN interview_answers a ON a.question_id = q.id
-        WHERE q.resume_id = ?
-        ORDER BY q.created_at ASC
-    ");
-    $stmtInt->execute([$selectedResume['id']]);
-    $interviewTranscripts = $stmtInt->fetchAll();
 }
 ?>
 <!DOCTYPE html>
@@ -88,7 +76,7 @@ if ($selectedResume) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruiter Dashboard - AI Resume Analyzer</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="HR administrative portal to oversee candidate rankings, adjust applicant status, and review AI interview scripts.">
+    <meta name="description" content="HR administrative portal to oversee candidate rankings, adjust applicant status, and review AI-generated candidate preparation questions.">
 </head>
 <body>
 
@@ -218,7 +206,7 @@ if ($selectedResume) {
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 60px 20px;">
                         <span style="font-size: 50px; margin-bottom: 20px; display: block; opacity: 0.5;">🕵️‍♂️</span>
                         <h2 id="inspect-heading" style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Review Applicant Profile</h2>
-                        <p style="max-width: 320px; color: var(--text-muted); font-size: 14px;">Select a candidate from the table list to audit their full ATS score report, skills gaps, and completed mock interview transcripts.</p>
+                        <p style="max-width: 320px; color: var(--text-muted); font-size: 14px;">Select a candidate from the table list to audit their full ATS score report, skills gaps, and AI-generated preparation questions.</p>
                     </div>
                 <?php else: ?>
                     <h2 class="card-title" id="inspect-heading" style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
@@ -301,30 +289,26 @@ if ($selectedResume) {
                         </div>
                     </div>
 
-                    <!-- Interview transcript section -->
+                    <!-- Interview Questions section -->
                     <div>
-                        <h4 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px;">AI Mock Interview Transcript</h4>
+                        <h4 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px;">AI-Generated Preparation Questions</h4>
                         <div style="background: rgba(255,255,255,0.015); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px; max-height: 400px; overflow-y: auto;">
-                            <?php if (empty($interviewTranscripts)): ?>
-                                <p style="text-align: center; color: var(--text-muted); font-size: 13px; margin: 0; padding: 20px 0;">This candidate has not completed the AI Mock Interview yet.</p>
+                            <?php 
+                            // Fetch generated questions
+                            $stmtQ = $db->prepare("SELECT * FROM interview_questions WHERE resume_id = ? ORDER BY id ASC");
+                            $stmtQ->execute([$selectedResume['id']]);
+                            $candidateQuestions = $stmtQ->fetchAll();
+                            ?>
+                            <?php if (empty($candidateQuestions)): ?>
+                                <p style="text-align: center; color: var(--text-muted); font-size: 13px; margin: 0; padding: 20px 0;">No interview questions generated for this candidate yet.</p>
                             <?php else: ?>
-                                <div style="display: flex; flex-direction: column; gap: 20px;">
-                                    <?php foreach ($interviewTranscripts as $idx => $chat): ?>
-                                        <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 15px;">
-                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                                <span style="font-size: 12px; font-weight: 700; color: var(--accent);">Question #<?php echo ($idx + 1); ?></span>
-                                                <span class="badge" style="background-color: <?php echo ($chat['score'] >= 8) ? 'var(--success-bg)' : (($chat['score'] >= 5) ? 'var(--warning-bg)' : 'var(--error-bg)'); ?>; color: <?php echo ($chat['score'] >= 8) ? 'var(--success)' : (($chat['score'] >= 5) ? 'var(--warning)' : 'var(--error)'); ?>; padding: 2px 6px; font-size: 10px;">
-                                                    Grade: <?php echo $chat['score']; ?>/10
-                                                </span>
-                                            </div>
-                                            <p style="font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 6px; line-height: 1.4;">Q: "<?php echo htmlspecialchars($chat['question']); ?>"</p>
-                                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1);"><strong style="color: rgba(255,255,255,0.7);">A:</strong> "<?php echo htmlspecialchars($chat['user_answer']); ?>"</p>
-                                            <div style="background: rgba(6, 182, 212, 0.04); border: 1px solid rgba(6, 182, 212, 0.1); border-radius: 4px; padding: 8px 12px; font-size: 11px; line-height: 1.4; color: var(--accent);">
-                                                <strong>AI Feedback:</strong> <?php echo htmlspecialchars($chat['feedback']); ?>
-                                            </div>
-                                        </div>
+                                <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
+                                    <?php foreach ($candidateQuestions as $idx => $q): ?>
+                                        <li style="line-height: 1.5; color: var(--text-main);">
+                                            <strong style="color: var(--accent);">Q<?php echo ($idx + 1); ?>:</strong> <?php echo htmlspecialchars($q['question']); ?>
+                                        </li>
                                     <?php endforeach; ?>
-                                </div>
+                                </ul>
                             <?php endif; ?>
                         </div>
                     </div>

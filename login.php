@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In - AI Interview & Resume Analyzer</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Log in to your candidate account to access your resume reports and mock interviews.">
+    <meta name="description" content="Log in to your candidate account to access your resume reports and custom interview preparation questions.">
 </head>
 <body>
     <div class="auth-wrapper">

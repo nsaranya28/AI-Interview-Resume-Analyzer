@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruiter Portal - AI Interview & Resume Analyzer</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Recruiter portal to manage candidates, review resumes, and evaluate mock interview transcripts.">
+    <meta name="description" content="Recruiter portal to manage candidates, review resumes, and evaluate technical preparation questions.">
 </head>
 <body>
     <div class="auth-wrapper">

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - AI Interview & Resume Analyzer</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Register a candidate account to analyze your resume and practice role-based mock interviews.">
+    <meta name="description" content="Register a candidate account to analyze your resume and study role-based technical preparation questions.">
 </head>
 <body>
     <div class="auth-wrapper">
