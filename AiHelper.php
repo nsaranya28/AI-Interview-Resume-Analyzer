@@ -95,27 +95,40 @@ function generateInterviewQuestions($resumeText, $targetRole) {
     if (empty($targetRole)) {
         $targetRole = "General Professional";
     }
-    
+
     $isDemo = $GLOBALS['demo_mode'];
-    
+
     if (!$isDemo) {
-        $prompt = "You are a professional hiring manager conducting a technical and behavioral mock interview for the role: '{$targetRole}'. "
-                . "Review the candidate's resume details and generate exactly 5 relevant interview questions. "
-                . "Make at least 3 questions technical/role-specific, and 2 behavioral/project-based based on their experience.\n\n"
-                . "You MUST output your response in JSON format. The response must be a simple JSON array of 5 strings, for example:\n"
-                . "[\"Question 1?\", \"Question 2?\", \"Question 3?\", \"Question 4?\", \"Question 5?\"]\n\n"
-                . "Resume Details:\n{$resumeText}";
-                
+        // Prompt Gemini to generate questions with model answers
+        $prompt = "You are a professional hiring manager preparing a mock interview for the role: '{$targetRole}'. Review the candidate's resume details and generate exactly 5 interview questions with concise but thorough answers. Provide the response in JSON format as an array of objects, each containing \"question\" and \"answer\" fields. Example:\n[\n  {\"question\": \"What is X?\", \"answer\": \"Answer describing X...\"},\n  ...\n]\nResume Details:\n{$resumeText}";
+
         $result = callGeminiAPI($prompt, true);
         if ($result) {
             $parsed = json_decode(trim($result), true);
+            // Expect array of objects with question and answer
             if (is_array($parsed) && count($parsed) >= 3) {
-                return array_slice($parsed, 0, 5);
+                // Ensure each has required keys
+                $qaList = [];
+                foreach ($parsed as $item) {
+                    if (isset($item['question']) && isset($item['answer'])) {
+                        $qaList[] = ['question' => $item['question'], 'answer' => $item['answer']];
+                    }
+                }
+                if (!empty($qaList)) {
+                    return array_slice($qaList, 0, 5);
+                }
             }
         }
     }
-    
-    return getMockQuestions($resumeText, $targetRole);
+
+    // Demo mode fallback returns only questions without answers
+    $questions = getMockQuestions($resumeText, $targetRole);
+    // Pair each question with an empty answer placeholder
+    $qaList = [];
+    foreach ($questions as $q) {
+        $qaList[] = ['question' => $q, 'answer' => ''];
+    }
+    return $qaList;
 }
 
 /**

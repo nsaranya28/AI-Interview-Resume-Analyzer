@@ -266,20 +266,15 @@ if ($selectedResume) {
     $questions = $stmtQ->fetchAll();
     
     if (empty($questions) && !empty($selectedResume['text_content'])) {
-        try {
-            $qList = generateInterviewQuestions($selectedResume['text_content'], $selectedResume['target_role']);
-            
-            $stmtInsert = $db->prepare("INSERT INTO interview_questions (resume_id, question) VALUES (?, ?)");
-            foreach ($qList as $qText) {
-                $stmtInsert->execute([$selectedResume['id'], trim($qText)]);
-            }
-            
-            // Re-fetch
-            $stmtQ->execute([$selectedResume['id']]);
-            $questions = $stmtQ->fetchAll();
-        } catch (Exception $e) {
-            // Silently ignore
+        // Generate Q&A list
+        $qaList = generateInterviewQuestions($selectedResume['text_content'], $selectedResume['target_role']);
+        $stmtInsert = $db->prepare("INSERT INTO interview_questions (resume_id, question, answer) VALUES (?, ?, ?)");
+        foreach ($qaList as $qa) {
+            $stmtInsert->execute([$selectedResume['id'], trim($qa['question']), $qa['answer'] ?? '']);
         }
+        // Re-fetch questions
+        $stmtQ->execute([$selectedResume['id']]);
+        $questions = $stmtQ->fetchAll();
     }
 }
 ?>
@@ -549,6 +544,9 @@ if ($selectedResume) {
                                         <?php foreach ($questions as $idx => $q): ?>
                                             <li style="line-height: 1.5; color: var(--text-main);">
                                                 <strong style="color: var(--primary);">Q<?php echo ($idx + 1); ?>:</strong> <?php echo htmlspecialchars($q['question']); ?>
+                                                <?php if (!empty($q['answer'])): ?>
+                                                    <br><em style="color: var(--text-muted);">Answer: <?php echo htmlspecialchars($q['answer']); ?></em>
+                                                <?php endif; ?>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
