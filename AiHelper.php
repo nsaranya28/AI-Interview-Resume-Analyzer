@@ -121,12 +121,12 @@ function generateInterviewQuestions($resumeText, $targetRole) {
         }
     }
 
-    // Demo mode fallback returns only questions without answers
+    // Demo mode fallback generates mock questions with placeholder answers
     $questions = getMockQuestions($resumeText, $targetRole);
-    // Pair each question with an empty answer placeholder
+    // Pair each question with a generic placeholder answer
     $qaList = [];
     foreach ($questions as $q) {
-        $qaList[] = ['question' => $q, 'answer' => ''];
+        $qaList[] = ['question' => $q, 'answer' => 'This is a sample answer generated for demo purposes.'];
     }
     return $qaList;
 }

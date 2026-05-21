@@ -543,10 +543,8 @@ if ($selectedResume) {
                                     <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
                                         <?php foreach ($questions as $idx => $q): ?>
                                             <li style="line-height: 1.5; color: var(--text-main);">
-                                                <strong style="color: var(--primary);">Q<?php echo ($idx + 1); ?>:</strong> <?php echo htmlspecialchars($q['question']); ?>
-                                                <?php if (!empty($q['answer'])): ?>
-                                                    <br><em style="color: var(--text-muted);">Answer: <?php echo htmlspecialchars($q['answer']); ?></em>
-                                                <?php endif; ?>
+
+                                                    <br><em style="color: var(--text-muted);">Answer: <?php echo htmlspecialchars($q['answer'] ?: 'No answer available.'); ?></em>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
