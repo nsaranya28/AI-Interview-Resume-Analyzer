@@ -1,86 +1,75 @@
 <?php
-// register.php
-// Candidate Sign Up page
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/db_connect.php';
 
-require_once __DIR__ . '/auth.php';
-
-if (isLoggedIn()) {
-    header("Location: dashboard.php");
-    exit;
-}
-
-$error = '';
-$success = '';
-
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-    
-    if (empty($name) || empty($email) || empty($password)) {
-        $error = "All fields are required.";
-    } elseif ($password !== $confirm_password) {
-        $error = "Passwords do not match.";
-    } elseif (strlen($password) < 6) {
-        $error = "Password must be at least 6 characters.";
-    } else {
-        if (registerUser($name, $email, $password)) {
-            $success = "Registration successful! You can now log in.";
-        } else {
-            $error = "Email already registered.";
+    $confirm = $_POST['confirm_password'] ?? '';
+
+    // Basic validation
+    if (empty($name)) $errors[] = 'Name is required.';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Valid email is required.';
+    if (strlen($password) < 6) $errors[] = 'Password must be at least 6 characters.';
+    if ($password !== $confirm) $errors[] = 'Passwords do not match.';
+
+    // Check if email already exists
+    if (empty($errors)) {
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        if ($stmt->fetch()) {
+            $errors[] = 'Email already registered.';
         }
+    }
+
+    // Insert user
+    if (empty($errors)) {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
+        $stmt->execute([$name, $email, $hash]);
+        $userId = $pdo->lastInsertId();
+        // Log the user in
+        session_start();
+        $_SESSION['user_id'] = $userId;
+        $_SESSION['name'] = $name;
+        header('Location: dashboard.php');
+        exit();
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - AI Interview & Resume Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Register a candidate account to analyze your resume and study role-based technical preparation questions.">
-</head>
-<body>
-    <div class="auth-wrapper">
-        <div class="card auth-card">
-            <a href="index.php" class="logo" style="justify-content: center; margin-bottom: 25px;">
-                <span>AI Resume Analyzer</span>
-            </a>
-            <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800;">Candidate Sign Up</h2>
-            
-            <?php if ($error): ?>
-                <div class="alert alert-error" id="error-alert"><?php echo htmlspecialchars($error); ?></div>
-            <?php endif; ?>
-            <?php if ($success): ?>
-                <div class="alert alert-success" id="success-alert"><?php echo htmlspecialchars($success); ?></div>
-            <?php endif; ?>
-            
-            <form action="register.php" method="POST">
-                <div class="form-group">
-                    <label class="form-label" for="name">Full Name</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="email">Email Address</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="name@domain.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Min. 6 characters" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="confirm_password">Confirm Password</label>
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Repeat password" required>
-                </div>
-                <button type="submit" id="btn-register" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Create Account</button>
-            </form>
-            
-            <div class="auth-footer">
-                Already have an account? <a href="login.php" id="link-login">Log In</a>
-            </div>
+<?php include __DIR__ . '/includes/header.php'; ?>
+<div class="container mt-5">
+    <h2 class="mb-4">Register</h2>
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach ($errors as $e): ?>
+                    <li><?= htmlspecialchars($e) ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-    </div>
-</body>
-</html>
+    <?php endif; ?>
+    <form method="post" action="register.php" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p class="mt-3">Already have an account? <a href="login.php">Login here</a>.</p>
+</div>
+<?php include __DIR__ . '/includes/footer.php'; ?>

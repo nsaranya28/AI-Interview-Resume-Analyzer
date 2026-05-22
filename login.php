@@ -1,83 +1,59 @@
 <?php
-// login.php
-// Candidate Log In page
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/db_connect.php';
 
-require_once __DIR__ . '/auth.php';
-
-// Handle logout request
-if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-    $wasAdmin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin');
-    logout();
-    if ($wasAdmin) {
-        header("Location: admin_login.php");
-    } else {
-        header("Location: login.php");
-    }
-    exit;
-}
-
-if (isLoggedIn()) {
-    header("Location: dashboard.php");
-    exit;
-}
-
-$error = '';
-
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    
-    if (empty($email) || empty($password)) {
-        $error = "Both fields are required.";
-    } else {
-        if (loginUser($email, $password)) {
-            header("Location: dashboard.php");
-            exit;
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Please enter a valid email.';
+    }
+    if (empty($password)) {
+        $errors[] = 'Password is required.';
+    }
+
+    if (empty($errors)) {
+        $stmt = $pdo->prepare('SELECT id, name, password FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+        if ($user && password_verify($password, $user['password'])) {
+            session_start();
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            header('Location: dashboard.php');
+            exit();
         } else {
-            $error = "Invalid email or password.";
+            $errors[] = 'Incorrect email or password.';
         }
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - AI Interview & Resume Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Log in to your candidate account to access your resume reports and custom interview preparation questions.">
-</head>
-<body>
-    <div class="auth-wrapper">
-        <div class="card auth-card">
-            <a href="index.php" class="logo" style="justify-content: center; margin-bottom: 25px;">
-                <span>AI Resume Analyzer</span>
-            </a>
-            <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800;">Candidate Log In</h2>
-            
-            <?php if ($error): ?>
-                <div class="alert alert-error" id="error-alert"><?php echo htmlspecialchars($error); ?></div>
-            <?php endif; ?>
-            
-            <form action="login.php" method="POST">
-                <div class="form-group">
-                    <label class="form-label" for="email">Email Address</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="name@domain.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" id="btn-login" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Log In</button>
-            </form>
-            
-            <div class="auth-footer">
-                Don't have an account? <a href="register.php" id="link-register">Sign Up</a>
-                <br><br>
-                <a href="admin_login.php" style="color: var(--accent); font-size: 13px;">Recruiter / HR Login Portal &rarr;</a>
-            </div>
+<?php include __DIR__ . '/includes/header.php'; ?>
+<div class="container mt-5">
+    <h2 class="mb-4">Login</h2>
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach ($errors as $e): ?>
+                    <li><?= htmlspecialchars($e) ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-    </div>
-</body>
-</html>
+    <?php endif; ?>
+    <form method="post" action="login.php" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p class="mt-3">Don't have an account? <a href="register.php">Register here</a>.</p>
+</div>
+<?php include __DIR__ . '/includes/footer.php'; ?>
