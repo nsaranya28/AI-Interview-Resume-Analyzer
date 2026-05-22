@@ -1,5 +1,5 @@
 <?php
-// index.php – redirect based on session status
+// index.php – redirect based on session
 session_start();
 if (isset($_SESSION['user_id'])) {
     header('Location: dashboard.php');

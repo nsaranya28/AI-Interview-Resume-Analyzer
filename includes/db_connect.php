@@ -1,4 +1,5 @@
 <?php
+// includes/db_connect.php – PDO connection wrapper
 require_once __DIR__ . '/config.php';
 try {
     $pdo = new PDO(
@@ -11,7 +12,6 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    // In production you would log this and show a user‑friendly page
     die('Database connection failed: ' . $e->getMessage());
 }
 ?>

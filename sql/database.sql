@@ -17,7 +17,17 @@ CREATE TABLE resumes (
     resume_name VARCHAR(255) NOT NULL,
     file_path VARCHAR(512) NOT NULL,
     ats_score DECIMAL(5,2) NULL,
-    analysis JSON NULL,
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE analysis_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    resume_id INT NOT NULL,
+    skills JSON NULL,
+    missing_keywords JSON NULL,
+    suggestions TEXT NULL,
+    interview_questions JSON NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (resume_id) REFERENCES resumes(id) ON DELETE CASCADE
 );
