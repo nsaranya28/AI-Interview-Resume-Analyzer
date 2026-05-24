@@ -14,8 +14,9 @@ define('DB_NAME', 'resume_analyzer');
 // Auto-load config settings from database
 require_once __DIR__ . '/db.php';
 
-$gemini_api_key = '';
-$demo_mode = true;
+// ---- INSERT YOUR GEMINI API KEY BELOW ----
+$gemini_api_key = 'YOUR_GEMINI_API_KEY_HERE'; // Replace with your actual Gemini API key
+$demo_mode = false; // Set to false to use real AI
 
 try {
     $db = getDB();
@@ -35,6 +36,8 @@ try {
 // Fallback to demo mode if API key is blank
 if (empty($gemini_api_key)) {
     $demo_mode = true;
+    // Optional: you can set a placeholder demo key
+    $gemini_api_key = '';
 }
 
 $GLOBALS['gemini_api_key'] = $gemini_api_key;

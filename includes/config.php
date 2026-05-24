@@ -3,5 +3,5 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'resume_analyzer');
 define('DB_USER', 'root');
-define('DB_PASS', ''); // Set your MySQL password
+define('DB_PASS', 'pass'); // Set your MySQL password
 ?>
