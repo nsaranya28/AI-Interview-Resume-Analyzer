@@ -1,6 +1,6 @@
 <?php
 // includes/header.php – common header and start of body
-session_start();
+require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db_connect.php';
 ?>
 <!doctype html>
@@ -10,8 +10,8 @@ require_once __DIR__ . '/db_connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI Resume Analyzer</title>
     <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
-    <link href="<?= BASE_URL ?>assets/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar navigation -->
