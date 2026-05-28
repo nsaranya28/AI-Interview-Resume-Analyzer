@@ -278,42 +278,11 @@ if ($selectedResume) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Dashboard - AI Resume Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Candidate profile portal to review ATS reports, check tech skill alignments, and study custom AI-generated interview preparation questions.">
-</head>
-<body>
-
-    <!-- Header Navigation -->
-    <header>
-        <div class="container nav-container">
-            <a href="index.php" class="logo">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#logoGrad)" />
-                    <path d="M2 17L12 22L22 17" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M2 12L12 17L22 12" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <defs>
-                        <linearGradient id="logoGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#a855f7" />
-                            <stop offset="1" stop-color="#06b6d4" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                AI Resume Analyzer
-            </a>
-            
-            <nav class="nav-links">
-                <span style="color: var(--text-muted); font-size: 14px; font-weight: 500;">Welcome, <strong style="color: #fff;"><?php echo htmlspecialchars($userName); ?></strong></span>
-                <a href="index.php" class="nav-link">Home</a>
-                <a href="login.php?logout=1" class="btn btn-danger btn-sm" id="logout-btn">Log Out</a>
-            </nav>
-        </div>
-    </header>
+<?php
+$pageTitle = 'Candidate Dashboard - AI Resume Analyzer';
+$pageDesc = 'Candidate profile portal to review ATS reports, check tech skill alignments, and study custom AI-generated interview preparation questions.';
+include __DIR__ . '/includes/header.php';
+?>
 
     <main class="container" style="padding-top: 40px; padding-bottom: 60px;">
         
@@ -540,11 +509,15 @@ if ($selectedResume) {
                                 <?php if (empty($questions)): ?>
                                     <p style="font-size: 13px; color: var(--text-muted); margin: 0;">No interview questions generated yet or analysis in progress.</p>
                                 <?php else: ?>
-                                    <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--text-muted); display: flex; flex-direction: column; gap: 10px;">
+                                    <ul style="margin: 0; padding: 0; display: flex; flex-direction: column; gap: 15px;">
                                         <?php foreach ($questions as $idx => $q): ?>
-                                            <li style="line-height: 1.5; color: var(--text-main);">
-
-                                                    <br><em style="color: var(--text-muted);">Answer: <?php echo htmlspecialchars($q['answer'] ?: 'No answer available.'); ?></em>
+                                            <li style="line-height: 1.6; color: var(--text-dark); margin-bottom: 15px; list-style-type: none; position: relative; padding-left: 24px;">
+                                                <span style="position: absolute; left: 0; top: 0; color: var(--secondary); font-weight: 800;">Q:</span>
+                                                <strong style="color: var(--text-dark);"><?php echo htmlspecialchars($q['question']); ?></strong>
+                                                <div style="margin-top: 6px; color: var(--text-main); font-size: 14px; line-height: 1.5; background: rgba(255,255,255,0.015); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 16px;">
+                                                    <span style="color: var(--accent); font-weight: 700; font-size: 11px; text-transform: uppercase; display: block; margin-bottom: 4px; letter-spacing: 0.05em;">Suggested Prep Answer:</span>
+                                                    <?php echo htmlspecialchars($q['answer'] ?: 'No answer available.'); ?>
+                                                </div>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
@@ -598,13 +571,6 @@ if ($selectedResume) {
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-grid" style="justify-content: center;">
-            <p>&copy; <?php echo date('Y'); ?> AI Resume Analyzer. All rights reserved.</p>
-        </div>
-    </footer>
-
     <!-- JS Helper for Upload UI and Toggle Edit Form -->
     <script>
         function updateFileName(input) {
@@ -639,5 +605,4 @@ if ($selectedResume) {
             }
         }
     </script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>

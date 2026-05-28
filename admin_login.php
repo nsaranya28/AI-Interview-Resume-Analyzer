@@ -26,44 +26,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+$pageTitle = 'Recruiter Portal - AI Resume Analyzer';
+include __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruiter Portal - AI Interview & Resume Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Recruiter portal to manage candidates, review resumes, and evaluate technical preparation questions.">
-</head>
-<body>
-    <div class="auth-wrapper">
-        <div class="card auth-card" style="border-color: rgba(6, 182, 212, 0.2);">
-            <a href="index.php" class="logo" style="justify-content: center; margin-bottom: 25px;">
-                <span>Recruiter Portal</span>
-            </a>
-            <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; color: var(--accent);">HR Log In</h2>
-            
-            <?php if ($error): ?>
-                <div class="alert alert-error" id="error-alert"><?php echo htmlspecialchars($error); ?></div>
-            <?php endif; ?>
-            
-            <form action="admin_login.php" method="POST">
-                <div class="form-group">
-                    <label class="form-label" for="email">Recruiter Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="admin@resume.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" id="btn-admin-login" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%); box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2); width: 100%; margin-top: 10px;">Access Dashboard</button>
-            </form>
-            
-            <div class="auth-footer">
-                <a href="login.php" style="color: var(--primary); font-size: 13px;">&larr; Back to Candidate Portal</a>
+
+<div class="auth-wrapper">
+    <div class="card auth-card" style="border-color: rgba(6, 182, 212, 0.25); box-shadow: var(--shadow-main), 0 0 50px rgba(6, 182, 212, 0.08);">
+        <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Recruiter Login
+        </h2>
+        <p style="text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 30px;">
+            Access the HR portal to inspect applicant metrics, check ATS scores, and update candidate stages.
+        </p>
+        
+        <?php if ($error): ?>
+            <div class="alert alert-error" id="error-alert"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+        
+        <form action="admin_login.php" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="email">Recruiter Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="admin@resume.com" required>
             </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" id="btn-admin-login" class="btn btn-primary" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); box-shadow: 0 8px 24px rgba(6, 182, 212, 0.25); width: 100%; margin-top: 15px; padding: 14px;">
+                Access Dashboard
+            </button>
+        </form>
+        
+        <div class="auth-footer" style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <a href="login.php" style="color: var(--primary); font-size: 13.5px;">&larr; Back to Candidate Portal</a>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<?php include __DIR__ . '/includes/footer.php'; ?>

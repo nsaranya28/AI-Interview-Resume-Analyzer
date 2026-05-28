@@ -69,42 +69,11 @@ if ($selectedResume) {
     $analysisData = json_decode($selectedResume['analysis_result'], true);
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruiter Dashboard - AI Resume Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="HR administrative portal to oversee candidate rankings, adjust applicant status, and review AI-generated candidate preparation questions.">
-</head>
-<body>
-
-    <!-- Header Navigation -->
-    <header style="border-bottom: 1px solid rgba(6, 182, 212, 0.35);">
-        <div class="container nav-container">
-            <a href="index.php" class="logo" style="background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px;">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#logoGrad)" />
-                    <path d="M2 17L12 22L22 17" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M2 12L12 17L22 12" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <defs>
-                        <linearGradient id="logoGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#06b6d4" />
-                            <stop offset="1" stop-color="#6366f1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                Recruiter Portal
-            </a>
-            
-            <nav class="nav-links">
-                <span style="color: var(--text-muted); font-size: 14px; font-weight: 500;">Console: <strong style="color: var(--accent);"><?php echo htmlspecialchars($adminName); ?></strong></span>
-                <a href="index.php" class="nav-link">Home</a>
-                <a href="login.php?logout=1" class="btn btn-danger btn-sm" id="admin-logout-btn">Log Out</a>
-            </nav>
-        </div>
-    </header>
+<?php
+$pageTitle = 'Recruiter Dashboard - AI Resume Analyzer';
+$pageDesc = 'HR administrative portal to oversee candidate rankings, adjust applicant status, and review AI-generated candidate preparation questions.';
+include __DIR__ . '/includes/header.php';
+?>
 
     <main class="container" style="padding-top: 40px; padding-bottom: 60px;">
         
@@ -317,12 +286,4 @@ if ($selectedResume) {
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-grid" style="justify-content: center;">
-            <p>&copy; <?php echo date('Y'); ?> AI Resume Analyzer. All rights reserved.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>
