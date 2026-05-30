@@ -98,8 +98,9 @@ include __DIR__ . '/includes/header.php';
                 </div>
                 <h3 style="font-size:20px;margin-bottom:4px;"><?= htmlspecialchars($user['name']) ?></h3>
                 <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;"><?= htmlspecialchars($user['email']) ?></p>
-                <?php if ($user['city'] || $user['country']): ?>
-                    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">📍 <?= htmlspecialchars(implode(', ', array_filter([$user['city'], $user['country']]))) ?></p>
+                <?php $userCity = $user['city'] ?? ''; $userCountry = $user['country'] ?? ''; ?>
+                <?php if ($userCity || $userCountry): ?>
+                    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">📍 <?= htmlspecialchars(implode(', ', array_filter([$userCity, $userCountry]))) ?></p>
                 <?php endif; ?>
                 <div style="border-top:1px solid var(--border-color);padding-top:16px;margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
                     <div>

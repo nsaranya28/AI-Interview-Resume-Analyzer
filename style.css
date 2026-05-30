@@ -864,3 +864,108 @@ footer {
     margin: 0;
     font-weight: 500;
 }
+
+/* ===== NEW V2 ADDITIONS ===== */
+
+/* Page header breadcrumb */
+.page-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+}
+
+/* Nav active highlight */
+.nav-link.active {
+    color: var(--text-dark);
+}
+
+/* Builder layout responsive */
+@media (max-width: 900px) {
+    .builder-layout {
+        grid-template-columns: 1fr !important;
+    }
+    .builder-sidebar {
+        position: static !important;
+        max-height: none !important;
+        height: auto !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* Interview layout responsive */
+@media (max-width: 900px) {
+    .interview-layout {
+        grid-template-columns: 1fr !important;
+    }
+    .interview-sidebar {
+        position: static !important;
+        height: auto !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* Admin layout responsive */
+@media (max-width: 900px) {
+    .admin-layout {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-sidebar {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .metric-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Glassmorphism glow animation */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.1); }
+    50% { box-shadow: 0 0 40px rgba(99,102,241,0.2); }
+}
+
+/* Smooth scroll for anchors */
+html { scroll-behavior: smooth; }
+
+/* Form hint text */
+.form-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+/* AI button glow */
+.ai-btn-glow {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Profile card stat items */
+.profile-stat { text-align: center; }
+
+/* Tag cloud */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,.05); border: 1px solid var(--border-color); color: var(--text-main); transition: var(--transition); }
+.tag:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Loading spinner */
+.spinner {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,255,255,.1);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive container for profile page */
+@media (max-width: 768px) {
+    .container > div[style*="grid-template-columns:300px"] {
+        grid-template-columns: 1fr !important;
+    }
+    .form-grid-2, .form-grid-3 {
+        grid-template-columns: 1fr !important;
+    }
+}

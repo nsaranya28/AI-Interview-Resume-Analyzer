@@ -4,9 +4,9 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db_connect.php';
 require_once __DIR__ . '/../auth.php';
 
-// Support dynamic titles and descriptions
 $pageTitle = isset($pageTitle) ? $pageTitle : 'AI Resume Analyzer';
-$pageDesc = isset($pageDesc) ? $pageDesc : 'Ultra-premium AI resume score calculation and interview preparation portal.';
+$pageDesc = isset($pageDesc) ? $pageDesc : 'Ultra-premium AI resume builder, ATS score analyzer and interview preparation portal.';
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -39,28 +39,32 @@ $pageDesc = isset($pageDesc) ? $pageDesc : 'Ultra-premium AI resume score calcul
                         </linearGradient>
                     </defs>
                 </svg>
-                AI Resume Analyzer
+                AI ResumeAI
             </a>
             
             <!-- Conditional Navigation Links -->
             <nav class="nav-links">
                 <?php if (isLoggedIn()): ?>
                     <span style="color: var(--text-muted); font-size: 14.5px; font-weight: 500;">
-                        Welcome, <strong style="color: var(--text-dark); text-shadow: var(--text-glow);"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Candidate') ?></strong>
+                        Welcome, <strong style="color: var(--text-dark); text-shadow: var(--text-glow);"><?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?></strong>
                     </span>
-                    <a href="<?= BASE_URL ?>dashboard.php" class="nav-link <?= (basename($_SERVER['PHP_SELF']) == 'dashboard.php') ? 'active' : '' ?>">Dashboard</a>
-                    <a href="<?= BASE_URL ?>login.php?logout=1" class="btn btn-danger btn-sm" id="logout-btn">Log Out</a>
+                    <a href="<?= BASE_URL ?>dashboard.php" class="nav-link <?= $currentPage === 'dashboard.php' ? 'active' : '' ?>">Analyzer</a>
+                    <a href="<?= BASE_URL ?>resume_builder.php" class="nav-link <?= $currentPage === 'resume_builder.php' ? 'active' : '' ?>">Builder</a>
+                    <a href="<?= BASE_URL ?>mock_interview.php" class="nav-link <?= $currentPage === 'mock_interview.php' ? 'active' : '' ?>">Interview</a>
+                    <a href="<?= BASE_URL ?>profile.php" class="nav-link <?= $currentPage === 'profile.php' ? 'active' : '' ?>">Profile</a>
+                    <a href="<?= BASE_URL ?>logout.php" class="btn btn-danger btn-sm" id="logout-btn">Log Out</a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <span style="color: var(--text-muted); font-size: 14.5px; font-weight: 500;">
-                        Console: <strong style="color: var(--secondary);"><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Recruiter') ?></strong>
+                        Admin: <strong style="color: var(--secondary);"><?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?></strong>
                     </span>
-                    <a href="<?= BASE_URL ?>admin_dashboard.php" class="nav-link <?= (basename($_SERVER['PHP_SELF']) == 'admin_dashboard.php') ? 'active' : '' ?>">Recruiter Portal</a>
-                    <a href="<?= BASE_URL ?>login.php?logout=1" class="btn btn-danger btn-sm" id="admin-logout-btn">Log Out</a>
+                    <a href="<?= BASE_URL ?>admin_dashboard.php" class="nav-link <?= $currentPage === 'admin_dashboard.php' ? 'active' : '' ?>">Admin Panel</a>
+                    <a href="<?= BASE_URL ?>logout.php" class="btn btn-danger btn-sm" id="admin-logout-btn">Log Out</a>
                 <?php else: ?>
-                    <a href="<?= BASE_URL ?>login.php" class="nav-link <?= (basename($_SERVER['PHP_SELF']) == 'login.php') ? 'active' : '' ?>">Login</a>
-                    <a href="<?= BASE_URL ?>register.php" class="nav-link <?= (basename($_SERVER['PHP_SELF']) == 'register.php') ? 'active' : '' ?>">Register</a>
-                    <a href="<?= BASE_URL ?>admin_login.php" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-weight: 700;">Recruiter Portal</a>
+                    <a href="<?= BASE_URL ?>login.php" class="nav-link <?= $currentPage === 'login.php' ? 'active' : '' ?>">Login</a>
+                    <a href="<?= BASE_URL ?>register.php" class="nav-link <?= $currentPage === 'register.php' ? 'active' : '' ?>">Register</a>
+                    <a href="<?= BASE_URL ?>admin_login.php" class="btn btn-secondary btn-sm" style="border-radius: var(--radius-sm); font-weight: 700;">Admin Portal</a>
                 <?php endif; ?>
             </nav>
         </div>
     </header>
+
