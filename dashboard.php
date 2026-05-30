@@ -316,7 +316,7 @@ include __DIR__ . '/includes/header.php';
                             <label class="form-label">Resume PDF File</label>
                             <div class="file-upload-wrapper">
                                 <span class="file-upload-icon">📁</span>
-                                <p style="margin-bottom: 5px; font-weight: 600; color: #fff;">Click to select your PDF</p>
+                                <p style="margin-bottom: 5px; font-weight: 600; color: var(--text-dark);">Click to select your PDF</p>
                                 <p style="font-size: 12px; margin-bottom: 0; color: var(--text-muted);">PDF formats only. Max 5MB.</p>
                                 <input type="file" name="resume" accept=".pdf" required onchange="updateFileName(this)">
                             </div>
@@ -345,9 +345,9 @@ include __DIR__ . '/includes/header.php';
                                     if ($res['ats_score'] >= 80) $scoreColor = 'excellent';
                                     elseif ($res['ats_score'] >= 60) $scoreColor = 'good';
                                 ?>
-                                <a href="dashboard.php?resume_id=<?php echo $res['id']; ?>" class="card-history-item" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; padding: 12px 16px; background: <?php echo $isActive ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.02)'; ?>; border: 1px solid <?php echo $isActive ? 'var(--primary-glow)' : 'var(--border-color)'; ?>; border-radius: var(--radius-sm); transition: var(--transition);">
+                                <a href="dashboard.php?resume_id=<?php echo $res['id']; ?>" class="card-history-item" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; padding: 12px 16px; background: <?php echo $isActive ? 'var(--primary-glow)' : 'var(--bg-base)'; ?>; border: 1px solid <?php echo $isActive ? 'var(--primary)' : 'var(--border-color)'; ?>; border-radius: var(--radius-sm); transition: var(--transition);">
                                     <div style="max-width: 75%;">
-                                        <h4 style="font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo htmlspecialchars($res['target_role']); ?></h4>
+                                        <h4 style="font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo htmlspecialchars($res['target_role']); ?></h4>
                                         <p style="font-size: 11px; color: var(--text-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><?php echo htmlspecialchars($res['file_name']); ?></p>
                                     </div>
                                     <div style="display: flex; flex-direction: column; align-items: flex-end;">

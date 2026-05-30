@@ -89,15 +89,15 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .interview-layout { display:grid; grid-template-columns:300px 1fr; gap:0; min-height:calc(100vh - 80px); }
-.interview-sidebar { background:rgba(6,8,19,.95); border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
+.interview-sidebar { background:#ffffff; border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
 .interview-main { padding:32px; }
 .q-card { background:var(--bg-surface); border:1px solid var(--border-color); border-radius:12px; padding:24px; margin-bottom:20px; transition:var(--transition); }
-.q-card:hover { border-color:rgba(99,102,241,.3); }
+.q-card:hover { border-color:rgba(99,102,241,0.2); box-shadow: var(--shadow-main); }
 .q-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px; }
-.q-badge.technical { background:rgba(99,102,241,.15); color:#818cf8; }
-.q-badge.hr { background:rgba(16,185,129,.15); color:#34d399; }
-.q-badge.project { background:rgba(245,158,11,.15); color:#fbbf24; }
-.q-badge.behavioral { background:rgba(239,68,68,.15); color:#f87171; }
+.q-badge.technical { background:#eef2ff; color:#4f46e5; border: 1px solid #e0e7ff; }
+.q-badge.hr { background:#ecfdf5; color:#059669; border: 1px solid #d1fae5; }
+.q-badge.project { background:#fffbeb; color:#d97706; border: 1px solid #fef3c7; }
+.q-badge.behavioral { background:#fef2f2; color:#dc2626; border: 1px solid #fee2e2; }
 .score-ring { width:80px; height:80px; position:relative; }
 .score-ring svg { transform:rotate(-90deg); }
 .score-ring .ring-label { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }

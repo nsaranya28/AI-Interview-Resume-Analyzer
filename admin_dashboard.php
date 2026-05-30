@@ -65,9 +65,9 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .admin-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 80px); }
-.admin-sidebar { background: rgba(6,8,19,.98); border-right: 1px solid var(--border-color); padding: 24px 16px; }
+.admin-sidebar { background: #ffffff; border-right: 1px solid var(--border-color); padding: 24px 16px; }
 .admin-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; transition: var(--transition); }
-.admin-nav-item:hover, .admin-nav-item.active { background: rgba(99,102,241,.1); color: var(--text-dark); }
+.admin-nav-item:hover, .admin-nav-item.active { background: #f1f5f9; color: var(--text-dark); }
 .admin-content { padding: 32px; }
 .metric-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 32px; }
 .metric-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; transition: var(--transition); }
