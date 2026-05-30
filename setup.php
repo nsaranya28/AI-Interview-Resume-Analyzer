@@ -16,7 +16,7 @@ echo "<!DOCTYPE html>
     <style>
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #0d0e15;
+            background-color: #1e223aff;
             color: #e4e6eb;
             display: flex;
             justify-content: center;
