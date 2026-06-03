@@ -268,6 +268,15 @@ include __DIR__ . '/includes/header.php';
             <div class="alert alert-error" style="margin-bottom:24px;"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
 
+        <?php
+        $templates = [
+            'ats' => ['emoji' => '🤖', 'label' => 'ATS Friendly', 'color' => '#10b981'],
+            'professional' => ['emoji' => '💼', 'label' => 'Professional', 'color' => '#6366f1'],
+            'modern' => ['emoji' => '✨', 'label' => 'Modern', 'color' => '#a855f7'],
+            'creative' => ['emoji' => '🎨', 'label' => 'Creative', 'color' => '#f59e0b'],
+        ];
+        ?>
+
         <?php if (!$resume): ?>
         <!-- Create New Resume -->
         <div class="card">
@@ -282,14 +291,7 @@ include __DIR__ . '/includes/header.php';
                 <div class="form-group">
                     <label class="form-label">Choose Template</label>
                     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px;">
-                        <?php
-                        $templates = [
-                            'ats' => ['emoji' => '🤖', 'label' => 'ATS Friendly', 'color' => '#10b981'],
-                            'professional' => ['emoji' => '💼', 'label' => 'Professional', 'color' => '#6366f1'],
-                            'modern' => ['emoji' => '✨', 'label' => 'Modern', 'color' => '#a855f7'],
-                            'creative' => ['emoji' => '🎨', 'label' => 'Creative', 'color' => '#f59e0b'],
-                        ];
-                        foreach ($templates as $key => $t): ?>
+                        <?php foreach ($templates as $key => $t): ?>
                             <label class="template-card" style="cursor:pointer;">
                                 <input type="radio" name="template" value="<?= $key ?>" style="display:none;" <?= $key === 'ats' ? 'checked' : '' ?> onchange="document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected'));this.closest('.template-card').classList.add('selected')">
                                 <div style="font-size:28px;"><?= $t['emoji'] ?></div>
