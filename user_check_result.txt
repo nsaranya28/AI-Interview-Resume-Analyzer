@@ -1,0 +1,11 @@
+--- Users Table ---
+ID: 1 | Name: N Saranya | Email: saranya02022005@gmail.com
+ID: 2 | Name: prakash | Email: kanagadharshni2006@gmail.com
+ID: 3 | Name: N Saranya | Email: s1@gmail.com
+ID: 4 | Name: prakash | Email: kanagadharshni@gmail.com
+ID: 5 | Name: prakash | Email: kanagadharshn@gmail.com
+ID: 6 | Name: N Saranya | Email: saranya0202205@gmail.com
+ID: 7 | Name: Test User | Email: test@example.com
+
+--- Admins Table ---
+ID: 1 | Name: HR Manager | Email: admin@resume.com
