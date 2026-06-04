@@ -93,7 +93,7 @@ include __DIR__ . '/includes/header.php';
         <!-- Left: Profile Card -->
         <div>
             <div class="card" style="text-align:center;">
-                <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#555555);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px;font-weight:900;color:#000;">
+                <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px;font-weight:900;color:#fff;">
                     <?= strtoupper(substr($user['name'], 0, 1)) ?>
                 </div>
                 <h3 style="font-size:20px;margin-bottom:4px;"><?= htmlspecialchars($user['name']) ?></h3>

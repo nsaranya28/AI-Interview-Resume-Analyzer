@@ -89,30 +89,30 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .interview-layout { display:grid; grid-template-columns:300px 1fr; gap:0; min-height:calc(100vh - 80px); }
-.interview-sidebar { background:#111111; border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
+.interview-sidebar { background:#ffffff; border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
 .interview-main { padding:32px; }
 .q-card { background:var(--bg-surface); border:1px solid var(--border-color); border-radius:12px; padding:24px; margin-bottom:20px; transition:var(--transition); }
-.q-card:hover { border-color:rgba(255,255,255,0.15); box-shadow: var(--shadow-main); }
+.q-card:hover { border-color:rgba(220, 38, 38, 0.2); box-shadow: var(--shadow-main); }
 .q-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px; }
-.q-badge.technical { background:rgba(255,255,255,0.06); color:#cccccc; border: 1px solid rgba(255,255,255,0.12); }
-.q-badge.hr { background:rgba(200,200,200,0.06); color:#aaaaaa; border: 1px solid rgba(200,200,200,0.12); }
-.q-badge.project { background:rgba(255,255,255,0.08); color:#e0e0e0; border: 1px solid rgba(255,255,255,0.15); }
-.q-badge.behavioral { background:rgba(150,150,150,0.06); color:#888888; border: 1px solid rgba(150,150,150,0.12); }
+.q-badge.technical { background:#fff5f5; color:#dc2626; border: 1px solid #fee2e2; }
+.q-badge.hr { background:#f0fdf4; color:#16a34a; border: 1px solid #dcfce7; }
+.q-badge.project { background:#fdf7e2; color:#b45309; border: 1px solid #fef3c7; }
+.q-badge.behavioral { background:#fff1f2; color:#e11d48; border: 1px solid #ffe4e6; }
 .score-ring { width:80px; height:80px; position:relative; }
 .score-ring svg { transform:rotate(-90deg); }
 .score-ring .ring-label { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .score-ring .ring-num { font-size:20px; font-weight:900; }
 .score-ring .ring-lbl { font-size:9px; color:var(--text-muted); font-weight:700; text-transform:uppercase; }
-.readiness-bar { height:10px; background:rgba(255,255,255,.05); border-radius:999px; overflow:hidden; margin-top:8px; }
-.readiness-fill { height:100%; background:linear-gradient(90deg,#ffffff,#888888); border-radius:999px; transition:width 1s ease; }
+.readiness-bar { height:10px; background:rgba(220, 38, 38,.03); border-radius:999px; overflow:hidden; margin-top:8px; }
+.readiness-fill { height:100%; background:linear-gradient(90deg,var(--primary),var(--accent)); border-radius:999px; transition:width 1s ease; }
 .answer-area { display:flex; flex-direction:column; gap:10px; margin-top:12px; }
-.answer-textarea { width:100%; padding:14px; background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:8px; color:var(--text-dark); font-family:var(--font-sans); font-size:14px; resize:vertical; min-height:80px; transition:var(--transition); }
+.answer-textarea { width:100%; padding:14px; background:rgba(220, 38, 38,.01); border:1px solid var(--border-color); border-radius:8px; color:var(--text-dark); font-family:var(--font-sans); font-size:14px; resize:vertical; min-height:80px; transition:var(--transition); }
 .answer-textarea:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); }
-.feedback-box { background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:8px; padding:16px; margin-top:12px; }
+.feedback-box { background:rgba(220, 38, 38,.03); border:1px solid var(--border-color); border-radius:8px; padding:16px; margin-top:12px; }
 .feedback-score { display:inline-flex; align-items:center; gap:8px; margin-bottom:8px; }
-.score-stars { color:#bbbbbb; font-size:18px; }
+.score-stars { color:#ca8a04; font-size:18px; }
 .q-nav-item { padding:10px 12px; border-radius:8px; cursor:pointer; font-size:13px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; }
-.q-nav-item:hover { background:rgba(255,255,255,.05); }
+.q-nav-item:hover { background:rgba(220, 38, 38,.04); }
 .q-nav-item.answered { border-left:3px solid var(--success); }
 .q-nav-item.unanswered { border-left:3px solid var(--border-color); }
 </style>
@@ -124,7 +124,7 @@ include __DIR__ . '/includes/header.php';
         
         <?php if ($interviewResume && !empty($questions)): ?>
         <!-- Score Overview -->
-        <div style="background:rgba(255,255,255,.03);border:1px solid var(--border-color);border-radius:10px;padding:16px;margin-bottom:20px;">
+        <div style="background:rgba(220, 38, 38,.03);border:1px solid var(--border-color);border-radius:10px;padding:16px;margin-bottom:20px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <div>
                     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);">Interview Score</div>
@@ -285,7 +285,7 @@ function submitAnswer(qId) {
         btn.disabled = false;
         if (d.success) {
             const stars = '★'.repeat(d.score) + '☆'.repeat(10 - d.score);
-            feedbackBox.innerHTML = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="color:#bbbbbb;font-size:18px;">${stars}</span><span style="font-size:14px;font-weight:800;color:var(--primary);">${d.score}/10</span></div><p style="font-size:13px;line-height:1.65;">${d.feedback}</p>`;
+            feedbackBox.innerHTML = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="color:#ca8a04;font-size:18px;">${stars}</span><span style="font-size:14px;font-weight:800;color:var(--primary);">${d.score}/10</span></div><p style="font-size:13px;line-height:1.65;">${d.feedback}</p>`;
             feedbackBox.style.display = 'block';
             // Animate
             feedbackBox.style.animation = 'none';
