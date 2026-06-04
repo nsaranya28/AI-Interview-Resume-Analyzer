@@ -41,7 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: dashboard.php');
             exit();
         } else {
-            $errors[] = 'Incorrect email or password.';
+            if ($email === 'admin@resume.com') {
+                $errors[] = 'This is an Admin account. Please use the <a href="admin_login.php" style="font-weight:bold;color:inherit;text-decoration:underline;">Admin Portal</a> to log in.';
+            } else {
+                $errors[] = 'Incorrect email or password.';
+            }
         }
     }
 }
@@ -63,7 +67,7 @@ include __DIR__ . '/includes/header.php';
             <div class="alert alert-error">
                 <ul style="margin: 0; padding-left: 20px; font-size: 13.5px;">
                     <?php foreach ($errors as $e): ?>
-                        <li><?= htmlspecialchars($e) ?></li>
+                        <li><?= $e ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
