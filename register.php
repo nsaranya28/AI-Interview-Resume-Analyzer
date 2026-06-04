@@ -51,7 +51,7 @@ include __DIR__ . '/includes/header.php';
 
 <div class="auth-wrapper">
     <div class="card auth-card">
-        <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             Candidate Register
         </h2>
         <p style="text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 30px;">

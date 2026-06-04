@@ -89,7 +89,7 @@ include __DIR__ . '/includes/header.php';
     <!-- Sidebar -->
     <aside class="admin-sidebar">
         <div style="margin-bottom:24px;">
-            <div style="width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#a855f7);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px;">👑</div>
+            <div style="width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,#ffffff,#888888);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px;">👑</div>
             <div style="font-size:15px;font-weight:800;color:var(--text-dark);"><?= htmlspecialchars($adminName) ?></div>
             <div style="font-size:12px;color:var(--text-muted);">Administrator</div>
         </div>
@@ -115,42 +115,42 @@ include __DIR__ . '/includes/header.php';
         <p style="color:var(--text-muted);margin-bottom:28px;">Platform-wide statistics and recent activity.</p>
         
         <div class="metric-cards">
-            <div class="metric-card" style="border-color:rgba(99,102,241,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--primary);"><?= $totalUsers ?></div>
                 <div class="metric-lbl">Total Users</div>
                 <div class="metric-change" style="color:var(--success);">👥 Registered Candidates</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(6,182,212,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--secondary);"><?= $totalResumes ?></div>
                 <div class="metric-lbl">Analyzed Resumes</div>
                 <div class="metric-change" style="color:var(--text-muted);">📄 Uploaded & Scored</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(168,85,247,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--accent);"><?= $totalBuilt ?></div>
                 <div class="metric-lbl">Built Resumes</div>
                 <div class="metric-change" style="color:var(--text-muted);">✏️ Using AI Builder</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(16,185,129,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--success);"><?= $avgAts ?>%</div>
                 <div class="metric-lbl">Average ATS Score</div>
                 <div class="metric-change" style="color:var(--text-muted);">📊 Platform Average</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(245,158,11,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--warning);"><?= $reviewCount ?></div>
                 <div class="metric-lbl">Pending Review</div>
                 <div class="metric-change" style="color:var(--warning);">⏳ Needs Attention</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(16,185,129,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--success);"><?= $shortlistedCount ?></div>
                 <div class="metric-lbl">Shortlisted</div>
                 <div class="metric-change" style="color:var(--success);">✅ Approved</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(239,68,68,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--error);"><?= $rejectedCount ?></div>
                 <div class="metric-lbl">Rejected</div>
                 <div class="metric-change" style="color:var(--error);">❌ Not Passed</div>
             </div>
-            <div class="metric-card" style="border-color:rgba(168,85,247,.3);">
+            <div class="metric-card" style="border-color:rgba(255,255,255,.15);">
                 <div class="metric-num" style="color:var(--accent);"><?= $totalInterviews ?></div>
                 <div class="metric-lbl">Interview Answers</div>
                 <div class="metric-change" style="color:var(--text-muted);">🎤 Mock Practice</div>
@@ -195,7 +195,7 @@ include __DIR__ . '/includes/header.php';
                         <tbody>
                             <?php foreach ($resumes as $res): ?>
                             <?php $sc = intval($res['ats_score']); $sc_color = $sc >= 80 ? 'var(--success)' : ($sc >= 60 ? 'var(--warning)' : 'var(--error)'); $isActive = ($selectedResumeId == $res['id']); ?>
-                            <tr style="<?= $isActive ? 'background:rgba(99,102,241,.05);' : '' ?>">
+                            <tr style="<?= $isActive ? 'background:rgba(255,255,255,.05);' : '' ?>">
                                 <td><strong><?= htmlspecialchars($res['candidate_name']) ?></strong></td>
                                 <td><?= htmlspecialchars($res['target_role']) ?></td>
                                 <td><strong style="color:<?= $sc_color ?>;"><?= $sc ?>%</strong></td>

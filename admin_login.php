@@ -32,8 +32,8 @@ include __DIR__ . '/includes/header.php';
 ?>
 
 <div class="auth-wrapper">
-    <div class="card auth-card" style="border-color: rgba(6, 182, 212, 0.25); box-shadow: var(--shadow-main), 0 0 50px rgba(6, 182, 212, 0.08);">
-        <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    <div class="card auth-card" style="border-color: rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-main), 0 0 50px rgba(255, 255, 255, 0.02);">
+        <h2 style="text-align: center; margin-bottom: 25px; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             Recruiter Login
         </h2>
         <p style="text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 30px;">
@@ -55,7 +55,7 @@ include __DIR__ . '/includes/header.php';
                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
             </div>
             
-            <button type="submit" id="btn-admin-login" class="btn btn-primary" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); box-shadow: 0 8px 24px rgba(6, 182, 212, 0.25); width: 100%; margin-top: 15px; padding: 14px;">
+            <button type="submit" id="btn-admin-login" class="btn btn-primary" style="background: #ffffff; color: #000000; box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1); width: 100%; margin-top: 15px; padding: 14px;">
                 Access Dashboard
             </button>
         </form>

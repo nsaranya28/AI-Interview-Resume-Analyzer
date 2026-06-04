@@ -22,26 +22,26 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .hero { padding: 100px 0 80px; text-align: center; position: relative; }
-.hero-title { font-size: 62px; font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 24px; background: linear-gradient(135deg, #f8fafc 0%, #a855f7 40%, #06b6d4 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-title { font-size: 62px; font-weight: 900; line-height: 1.1; letter-spacing: -2px; margin-bottom: 24px; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-sub { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto 40px; line-height: 1.6; }
 .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(99,102,241,.08); border: 1px solid rgba(99,102,241,.25); border-radius: 999px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 24px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.15); border-radius: 999px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 24px; }
 .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .feature-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; transition: var(--transition); position: relative; overflow: hidden; }
 .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); opacity: 0; transition: var(--transition); }
-.feature-card:hover { transform: translateY(-6px); border-color: rgba(99,102,241,.3); box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+.feature-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,.2); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
 .feature-card:hover::before { opacity: 1; }
 .feature-icon { font-size: 36px; margin-bottom: 16px; display: block; }
 .feature-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
 .feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 .stats-section { text-align: center; padding: 60px 0; }
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-.stat-item .num { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-item .num { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .stat-item .label { font-size: 14px; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
-.cta-section { background: linear-gradient(135deg, rgba(99,102,241,.1) 0%, rgba(168,85,247,.1) 100%); border: 1px solid rgba(99,102,241,.2); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; margin: 60px 0; }
+.cta-section { background: linear-gradient(135deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.05) 100%); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-lg); padding: 60px 40px; text-align: center; margin: 60px 0; }
 .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .step-card { text-align: center; padding: 20px; }
-.step-num { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #fff; margin: 0 auto 16px; }
+.step-num { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #000; margin: 0 auto 16px; }
 .step-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 .step-desc { font-size: 13px; color: var(--text-muted); }
 .section-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); margin-bottom: 12px; }
@@ -86,32 +86,32 @@ include __DIR__ . '/includes/header.php';
             <p style="color:var(--text-muted);max-width:500px;margin:0 auto;">From building your first resume to landing your dream job — we've got every step covered.</p>
         </div>
         <div class="features-grid">
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#6366f1,#a855f7);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#ffffff,#888888);">
                 <span class="feature-icon">✏️</span>
                 <div class="feature-title">AI Resume Builder</div>
                 <div class="feature-desc">Create professional resumes with 10+ sections including experience, projects, certifications, achievements, and more. Choose from 4 beautiful templates.</div>
             </div>
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#06b6d4,#6366f1);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#aaaaaa,#ffffff);">
                 <span class="feature-icon">📊</span>
                 <div class="feature-title">ATS Score Analyzer</div>
                 <div class="feature-desc">Upload your resume PDF and get an instant ATS score (0-100) with keyword analysis, missing skills detection, grammar check, and improvement suggestions.</div>
             </div>
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#a855f7,#06b6d4);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#555555,#aaaaaa);">
                 <span class="feature-icon">🎤</span>
                 <div class="feature-title">Mock Interview AI</div>
                 <div class="feature-desc">Practice answering AI-generated interview questions tailored to your resume and target role. Get instant scores and detailed feedback on every answer.</div>
             </div>
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#f59e0b,#ef4444);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#cccccc,#666666);">
                 <span class="feature-icon">🎯</span>
                 <div class="feature-title">Job Role Matching</div>
                 <div class="feature-desc">Enter your target role and see exactly how your resume matches — with match percentage, missing keywords, and specific improvement recommendations.</div>
             </div>
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#10b981,#06b6d4);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#444444,#bbbbbb);">
                 <span class="feature-icon">🚀</span>
                 <div class="feature-title">AI Suggestions Engine</div>
                 <div class="feature-desc">Get AI-powered improvements for your career summary, experience descriptions, projects, and keywords to maximize your ATS and interview scores.</div>
             </div>
-            <div class="feature-card" style="--gradient:linear-gradient(90deg,#6366f1,#10b981);">
+            <div class="feature-card" style="--gradient:linear-gradient(90deg,#ffffff,#555555);">
                 <span class="feature-icon">🖨️</span>
                 <div class="feature-title">Export & Share</div>
                 <div class="feature-desc">Preview your resume in a live editor, export to PDF using your browser, and share via a unique public link. 4 stunning templates to choose from.</div>

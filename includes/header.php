@@ -34,8 +34,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <path d="M2 12L12 17L22 12" stroke="url(#headerLogoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <defs>
                         <linearGradient id="headerLogoGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#a855f7" />
-                            <stop offset="1" stop-color="#06b6d4" />
+                            <stop stop-color="#ffffff" />
+                            <stop offset="1" stop-color="#888888" />
                         </linearGradient>
                     </defs>
                 </svg>

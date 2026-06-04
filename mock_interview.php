@@ -89,28 +89,28 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .interview-layout { display:grid; grid-template-columns:300px 1fr; gap:0; min-height:calc(100vh - 80px); }
-.interview-sidebar { background:#ffffff; border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
+.interview-sidebar { background:#111111; border-right:1px solid var(--border-color); padding:24px 16px; position:sticky; top:80px; height:calc(100vh - 80px); overflow-y:auto; }
 .interview-main { padding:32px; }
 .q-card { background:var(--bg-surface); border:1px solid var(--border-color); border-radius:12px; padding:24px; margin-bottom:20px; transition:var(--transition); }
-.q-card:hover { border-color:rgba(99,102,241,0.2); box-shadow: var(--shadow-main); }
+.q-card:hover { border-color:rgba(255,255,255,0.15); box-shadow: var(--shadow-main); }
 .q-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px; }
-.q-badge.technical { background:#eef2ff; color:#4f46e5; border: 1px solid #e0e7ff; }
-.q-badge.hr { background:#ecfdf5; color:#059669; border: 1px solid #d1fae5; }
-.q-badge.project { background:#fffbeb; color:#d97706; border: 1px solid #fef3c7; }
-.q-badge.behavioral { background:#fef2f2; color:#dc2626; border: 1px solid #fee2e2; }
+.q-badge.technical { background:rgba(255,255,255,0.06); color:#cccccc; border: 1px solid rgba(255,255,255,0.12); }
+.q-badge.hr { background:rgba(200,200,200,0.06); color:#aaaaaa; border: 1px solid rgba(200,200,200,0.12); }
+.q-badge.project { background:rgba(255,255,255,0.08); color:#e0e0e0; border: 1px solid rgba(255,255,255,0.15); }
+.q-badge.behavioral { background:rgba(150,150,150,0.06); color:#888888; border: 1px solid rgba(150,150,150,0.12); }
 .score-ring { width:80px; height:80px; position:relative; }
 .score-ring svg { transform:rotate(-90deg); }
 .score-ring .ring-label { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .score-ring .ring-num { font-size:20px; font-weight:900; }
 .score-ring .ring-lbl { font-size:9px; color:var(--text-muted); font-weight:700; text-transform:uppercase; }
 .readiness-bar { height:10px; background:rgba(255,255,255,.05); border-radius:999px; overflow:hidden; margin-top:8px; }
-.readiness-fill { height:100%; background:linear-gradient(90deg,#6366f1,#a855f7); border-radius:999px; transition:width 1s ease; }
+.readiness-fill { height:100%; background:linear-gradient(90deg,#ffffff,#888888); border-radius:999px; transition:width 1s ease; }
 .answer-area { display:flex; flex-direction:column; gap:10px; margin-top:12px; }
 .answer-textarea { width:100%; padding:14px; background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:8px; color:var(--text-dark); font-family:var(--font-sans); font-size:14px; resize:vertical; min-height:80px; transition:var(--transition); }
 .answer-textarea:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); }
-.feedback-box { background:rgba(99,102,241,.08); border:1px solid rgba(99,102,241,.25); border-radius:8px; padding:16px; margin-top:12px; }
+.feedback-box { background:rgba(255,255,255,.03); border:1px solid var(--border-color); border-radius:8px; padding:16px; margin-top:12px; }
 .feedback-score { display:inline-flex; align-items:center; gap:8px; margin-bottom:8px; }
-.score-stars { color:#fbbf24; font-size:18px; }
+.score-stars { color:#bbbbbb; font-size:18px; }
 .q-nav-item { padding:10px 12px; border-radius:8px; cursor:pointer; font-size:13px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; }
 .q-nav-item:hover { background:rgba(255,255,255,.05); }
 .q-nav-item.answered { border-left:3px solid var(--success); }
@@ -124,7 +124,7 @@ include __DIR__ . '/includes/header.php';
         
         <?php if ($interviewResume && !empty($questions)): ?>
         <!-- Score Overview -->
-        <div style="background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25);border-radius:10px;padding:16px;margin-bottom:20px;">
+        <div style="background:rgba(255,255,255,.03);border:1px solid var(--border-color);border-radius:10px;padding:16px;margin-bottom:20px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <div>
                     <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);">Interview Score</div>
@@ -213,9 +213,9 @@ include __DIR__ . '/includes/header.php';
                     </div>
                 </div>
                 <?php if (isset($userAnswers[$q['id']])): ?>
-                <div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:6px 14px;text-align:center;flex-shrink:0;margin-left:16px;">
-                    <div style="font-size:20px;font-weight:900;color:var(--success);"><?= $userAnswers[$q['id']]['score'] ?></div>
-                    <div style="font-size:10px;color:var(--success);font-weight:700;">/ 10</div>
+                <div style="background:rgba(255,255,255,.05);border:1px solid var(--border-color);border-radius:8px;padding:6px 14px;text-align:center;flex-shrink:0;margin-left:16px;">
+                    <div style="font-size:20px;font-weight:900;color:var(--text-dark);"><?= $userAnswers[$q['id']]['score'] ?></div>
+                    <div style="font-size:10px;color:var(--text-muted);font-weight:700;">/ 10</div>
                 </div>
                 <?php endif; ?>
             </div>
@@ -248,11 +248,11 @@ include __DIR__ . '/includes/header.php';
 
         <!-- Overall Score Summary -->
         <?php if ($answeredCount >= 3): ?>
-        <div class="card" style="margin-top:30px;text-align:center;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(168,85,247,.1));border-color:rgba(99,102,241,.3);">
+        <div class="card" style="margin-top:30px;text-align:center;background:rgba(255,255,255,.02);border-color:var(--border-color);">
             <h3 style="font-size:22px;margin-bottom:8px;">🏆 Interview Performance Summary</h3>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:20px 0;">
                 <div><div style="font-size:36px;font-weight:900;color:var(--primary);"><?= $avgScore ?>/10</div><div style="font-size:12px;color:var(--text-muted);">Average Score</div></div>
-                <div><div style="font-size:36px;font-weight:900;color:<?= $interviewReadiness >= 80 ? 'var(--success)' : ($interviewReadiness >= 60 ? 'var(--warning)' : 'var(--error)') ?>;"><?= $interviewReadiness ?>%</div><div style="font-size:12px;color:var(--text-muted);">Readiness</div></div>
+                <div><div style="font-size:36px;font-weight:900;color:var(--text-dark);"><?= $interviewReadiness ?>%</div><div style="font-size:12px;color:var(--text-muted);">Readiness</div></div>
                 <div><div style="font-size:36px;font-weight:900;"><?= $answeredCount ?>/<?= count($questions) ?></div><div style="font-size:12px;color:var(--text-muted);">Completed</div></div>
             </div>
             <a href="dashboard.php?resume_id=<?= $selectedResumeId ?>" class="btn btn-primary">View Full ATS Report →</a>
@@ -285,7 +285,7 @@ function submitAnswer(qId) {
         btn.disabled = false;
         if (d.success) {
             const stars = '★'.repeat(d.score) + '☆'.repeat(10 - d.score);
-            feedbackBox.innerHTML = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="color:#fbbf24;font-size:18px;">${stars}</span><span style="font-size:14px;font-weight:800;color:var(--primary);">${d.score}/10</span></div><p style="font-size:13px;line-height:1.65;">${d.feedback}</p>`;
+            feedbackBox.innerHTML = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="color:#bbbbbb;font-size:18px;">${stars}</span><span style="font-size:14px;font-weight:800;color:var(--primary);">${d.score}/10</span></div><p style="font-size:13px;line-height:1.65;">${d.feedback}</p>`;
             feedbackBox.style.display = 'block';
             // Animate
             feedbackBox.style.animation = 'none';
