@@ -1,7 +1,16 @@
 <?php
 // resume_builder.php - Full AI Resume Builder
 require_once __DIR__ . '/auth.php';
-requireLogin();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$isGuest = false;
+if (isset($_GET['trial']) || isset($_SESSION['guest_mode'])) {
+    $isGuest = true;
+    $_SESSION['guest_mode'] = true;
+} else {
+    requireLogin();
+}
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/AiHelper.php';
 
@@ -9,6 +18,118 @@ $userId = getCurrentUserId();
 $db = getDB();
 $success = '';
 $error = '';
+
+$templates = [
+    'ats' => ['emoji' => '🤖', 'label' => 'ATS Friendly', 'color' => '#10b981'],
+    'professional' => ['emoji' => '💼', 'label' => 'Professional', 'color' => '#6366f1'],
+    'modern' => ['emoji' => '✨', 'label' => 'Modern', 'color' => '#a855f7'],
+    'creative' => ['emoji' => '🎨', 'label' => 'Creative', 'color' => '#f59e0b'],
+    'minimal' => ['emoji' => '📄', 'label' => 'Minimalist', 'color' => '#4b5563'],
+    'executive' => ['emoji' => '👑', 'label' => 'Executive', 'color' => '#1e3a8a'],
+    'academic' => ['emoji' => '🎓', 'label' => 'Academic / CV', 'color' => '#0f172a'],
+    'tech_sleek' => ['emoji' => '💻', 'label' => 'Tech Sleek', 'color' => '#06b6d4'],
+    'elegant' => ['emoji' => '🌹', 'label' => 'Elegant / Warm', 'color' => '#b45309'],
+];
+
+function getGuestMockData($templateKey) {
+    $titleLabel = 'ATS Friendly';
+    global $templates;
+    if (isset($templates[$templateKey])) {
+        $titleLabel = $templates[$templateKey]['label'];
+    }
+    return [
+        'resume' => [
+            'id' => 'guest',
+            'title' => 'My ' . $titleLabel . ' Resume',
+            'template' => $templateKey,
+            'full_name' => 'John Doe',
+            'job_title' => 'Senior Software Engineer',
+            'email' => 'john.doe@example.com',
+            'phone' => '+1 (555) 019-2834',
+            'address' => 'San Francisco, CA',
+            'linkedin' => 'https://linkedin.com/in/johndoe',
+            'github' => 'https://github.com/johndoe',
+            'portfolio' => 'https://johndoe.dev',
+            'summary' => 'Innovative and results-driven Senior Software Engineer with 8+ years of experience designing, building, and optimizing scalable web applications. Expert in React, Node.js, Python, and cloud architecture. Passionate about AI integrations and mentoring engineering teams.',
+            'languages' => json_encode(['English', 'Spanish', 'German']),
+        ],
+        'education' => [
+            [
+                'institution' => 'Stanford University',
+                'degree' => 'Master of Science',
+                'field_of_study' => 'Computer Science',
+                'start_year' => '2016',
+                'end_year' => '2018',
+                'gpa' => '3.8/4.0',
+                'description' => 'Specialized in Software Systems and Artificial Intelligence.',
+            ],
+            [
+                'institution' => 'University of California, Berkeley',
+                'degree' => 'Bachelor of Science',
+                'field_of_study' => 'Computer Science',
+                'start_year' => '2012',
+                'end_year' => '2016',
+                'gpa' => '3.7/4.0',
+                'description' => 'Graduated with Honors. Teaching assistant for Data Structures.',
+            ]
+        ],
+        'skills' => [
+            ['skill_name' => 'React & Next.js', 'level' => 'expert', 'category' => 'Frontend'],
+            ['skill_name' => 'Node.js & Express', 'level' => 'expert', 'category' => 'Backend'],
+            ['skill_name' => 'Python & Django', 'level' => 'advanced', 'category' => 'Backend'],
+            ['skill_name' => 'PostgreSQL & MySQL', 'level' => 'expert', 'category' => 'Database'],
+            ['skill_name' => 'AWS (S3, EC2, Lambda)', 'level' => 'advanced', 'category' => 'Cloud'],
+            ['skill_name' => 'System Design', 'level' => 'expert', 'category' => 'Methodology'],
+        ],
+        'experience' => [
+            [
+                'company' => 'Google Inc.',
+                'position' => 'Senior Software Engineer',
+                'location' => 'Mountain View, CA',
+                'start_date' => 'Jun 2021',
+                'end_date' => 'Present',
+                'is_current' => 1,
+                'description' => "• Led a team of 5 engineers to redesign the analytics dashboard, improving query response times by 40%.\n• Designed and implemented scalable microservices handling 10M+ daily active requests using Node.js and gRPC.\n• Mentored junior developers and introduced robust CI/CD practices that reduced deployment errors by 25%.",
+            ],
+            [
+                'company' => 'Tech Solutions Ltd.',
+                'position' => 'Software Engineer',
+                'location' => 'San Francisco, CA',
+                'start_date' => 'Sep 2018',
+                'end_date' => 'May 2021',
+                'is_current' => 0,
+                'description' => "• Developed and maintained key backend APIs using Python/Django and PostgreSQL.\n• Built responsive frontend interfaces using React, leading to a 15% increase in user session duration.\n• Optimized database queries and database indexing, reducing CPU usage by 30%.",
+            ]
+        ],
+        'projects' => [
+            [
+                'project_name' => 'AI Resume Analyzer',
+                'role' => 'Lead Developer',
+                'technologies' => 'React, Node.js, OpenAI API, MySQL',
+                'description' => 'A web application that leverages AI to score candidate resumes against target job descriptions and suggest real-time improvements.',
+                'url' => 'https://ai-resume-analyzer.demo',
+                'github_url' => 'https://github.com/johndoe/resume-analyzer',
+            ]
+        ],
+        'certifications' => [
+            [
+                'cert_name' => 'AWS Certified Solutions Architect',
+                'issuer' => 'Amazon Web Services',
+                'issue_date' => '2023',
+                'expiry_date' => '2026',
+                'credential_id' => 'AWS-SA-1293',
+                'cert_url' => 'https://aws.amazon.com',
+            ]
+        ],
+        'achievements' => [
+            [
+                'title' => 'Outstanding Performance Award',
+                'description' => 'Awarded for exceptional leadership in delivering the Google Analytics Migration project ahead of schedule.',
+                'date' => '2023',
+            ]
+        ]
+    ];
+}
 
 // Handle POST actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,6 +146,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if ($action === 'save_resume') {
+        if ($isGuest) {
+            // Process personal info, summary, languages
+            $languages = array_filter(array_map('trim', explode(',', $_POST['languages'] ?? '')));
+            $langJson = !empty($languages) ? json_encode(array_values($languages)) : null;
+
+            $guestResume = [
+                'id' => 'guest',
+                'title' => trim($_POST['title'] ?? 'My Resume'),
+                'template' => $_POST['template'] ?? 'ats',
+                'full_name' => trim($_POST['full_name'] ?? ''),
+                'job_title' => trim($_POST['job_title'] ?? ''),
+                'email' => trim($_POST['email'] ?? ''),
+                'phone' => trim($_POST['phone'] ?? ''),
+                'address' => trim($_POST['address'] ?? ''),
+                'linkedin' => trim($_POST['linkedin'] ?? ''),
+                'github' => trim($_POST['github'] ?? ''),
+                'portfolio' => trim($_POST['portfolio'] ?? ''),
+                'summary' => trim($_POST['summary'] ?? ''),
+                'languages' => $langJson,
+            ];
+
+            // Process Education
+            $guestEdu = [];
+            if (!empty($_POST['edu_institution'])) {
+                foreach ($_POST['edu_institution'] as $i => $inst) {
+                    if (empty(trim($inst))) continue;
+                    $guestEdu[] = [
+                        'institution' => trim($inst),
+                        'degree' => trim($_POST['edu_degree'][$i]??''),
+                        'field_of_study' => trim($_POST['edu_field'][$i]??''),
+                        'start_year' => trim($_POST['edu_start'][$i]??''),
+                        'end_year' => trim($_POST['edu_end'][$i]??''),
+                        'gpa' => trim($_POST['edu_gpa'][$i]??''),
+                        'description' => trim($_POST['edu_desc'][$i]??''),
+                    ];
+                }
+            }
+
+            // Process Skills
+            $guestSkills = [];
+            if (!empty($_POST['skill_name'])) {
+                foreach ($_POST['skill_name'] as $i => $sk) {
+                    if (empty(trim($sk))) continue;
+                    $guestSkills[] = [
+                        'skill_name' => trim($sk),
+                        'level' => $_POST['skill_level'][$i]??'intermediate',
+                        'category' => trim($_POST['skill_cat'][$i]??''),
+                    ];
+                }
+            }
+
+            // Process Experience
+            $guestExp = [];
+            if (!empty($_POST['exp_company'])) {
+                foreach ($_POST['exp_company'] as $i => $co) {
+                    if (empty(trim($co))) continue;
+                    $isCurrent = isset($_POST['exp_current'][$i]) ? 1 : 0;
+                    $guestExp[] = [
+                        'company' => trim($co),
+                        'position' => trim($_POST['exp_position'][$i]??''),
+                        'location' => trim($_POST['exp_location'][$i]??''),
+                        'start_date' => trim($_POST['exp_start'][$i]??''),
+                        'end_date' => $isCurrent ? 'Present' : trim($_POST['exp_end'][$i]??''),
+                        'is_current' => $isCurrent,
+                        'description' => trim($_POST['exp_desc'][$i]??''),
+                    ];
+                }
+            }
+
+            // Process Projects
+            $guestProj = [];
+            if (!empty($_POST['proj_name'])) {
+                foreach ($_POST['proj_name'] as $i => $pn) {
+                    if (empty(trim($pn))) continue;
+                    $guestProj[] = [
+                        'project_name' => trim($pn),
+                        'role' => trim($_POST['proj_role'][$i]??''),
+                        'technologies' => trim($_POST['proj_tech'][$i]??''),
+                        'description' => trim($_POST['proj_desc'][$i]??''),
+                        'url' => trim($_POST['proj_url'][$i]??''),
+                        'github_url' => trim($_POST['proj_github'][$i]??''),
+                    ];
+                }
+            }
+
+            // Process Certifications
+            $guestCerts = [];
+            if (!empty($_POST['cert_name'])) {
+                foreach ($_POST['cert_name'] as $i => $cn) {
+                    if (empty(trim($cn))) continue;
+                    $guestCerts[] = [
+                        'cert_name' => trim($cn),
+                        'issuer' => trim($_POST['cert_issuer'][$i]??''),
+                        'issue_date' => trim($_POST['cert_date'][$i]??''),
+                        'expiry_date' => trim($_POST['cert_expiry'][$i]??''),
+                        'credential_id' => trim($_POST['cert_id'][$i]??''),
+                        'cert_url' => trim($_POST['cert_url'][$i]??''),
+                    ];
+                }
+            }
+
+            // Process Achievements
+            $guestAch = [];
+            if (!empty($_POST['ach_title'])) {
+                foreach ($_POST['ach_title'] as $i => $at) {
+                    if (empty(trim($at))) continue;
+                    $guestAch[] = [
+                        'title' => trim($at),
+                        'description' => trim($_POST['ach_desc'][$i]??''),
+                        'date' => trim($_POST['ach_date'][$i]??''),
+                    ];
+                }
+            }
+
+            $_SESSION['guest_resume_data'] = [
+                'resume' => $guestResume,
+                'education' => $guestEdu,
+                'skills' => $guestSkills,
+                'experience' => $guestExp,
+                'projects' => $guestProj,
+                'certifications' => $guestCerts,
+                'achievements' => $guestAch,
+            ];
+
+            header("Location: resume_builder.php?success=saved&trial=1");
+            exit;
+        }
+
         $resumeId = intval($_POST['resume_id'] ?? 0);
         // Verify ownership
         $chk = $db->prepare("SELECT id FROM resume_profiles WHERE id=? AND user_id=?");
@@ -137,42 +386,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 render:
 
-// Load existing resumes list
-$stmt = $db->prepare("SELECT id, title, template, updated_at FROM resume_profiles WHERE user_id=? ORDER BY updated_at DESC");
-$stmt->execute([$userId]);
-$myResumes = $stmt->fetchAll();
+if ($isGuest) {
+    $myResumes = [];
+    
+    // Check if switching templates
+    if (isset($_GET['template'])) {
+        $chosenTemplate = $_GET['template'];
+        // Validate template
+        if (!array_key_exists($chosenTemplate, $templates)) {
+            $chosenTemplate = 'ats';
+        }
+        $_SESSION['guest_resume_data'] = getGuestMockData($chosenTemplate);
+        header("Location: resume_builder.php?trial=1");
+        exit;
+    }
+    
+    if (!isset($_SESSION['guest_resume_data'])) {
+        $_SESSION['guest_resume_data'] = getGuestMockData('ats');
+    }
+    
+    $resumeData = $_SESSION['guest_resume_data'];
+    $resume = $resumeData['resume'];
+    $education = $resumeData['education'];
+    $skills = $resumeData['skills'];
+    $experience = $resumeData['experience'];
+    $projects = $resumeData['projects'];
+    $certifications = $resumeData['certifications'];
+    $achievements = $resumeData['achievements'];
+    $currentId = 'guest';
+} else {
+    // Load existing resumes list
+    $stmt = $db->prepare("SELECT id, title, template, updated_at FROM resume_profiles WHERE user_id=? ORDER BY updated_at DESC");
+    $stmt->execute([$userId]);
+    $myResumes = $stmt->fetchAll();
 
-// Load selected resume
-$currentId = isset($_GET['id']) ? intval($_GET['id']) : null;
-$resume = null;
-$education = $experience = $projects = $certifications = $achievements = $skills = [];
+    // Load selected resume
+    $currentId = isset($_GET['id']) ? intval($_GET['id']) : null;
+    $resume = null;
+    $education = $experience = $projects = $certifications = $achievements = $skills = [];
 
-if (!$currentId && !empty($myResumes)) {
-    $currentId = $myResumes[0]['id'];
-}
+    // Force create new if template query param is passed
+    if (isset($_GET['template'])) {
+        $currentId = null;
+    } elseif (!$currentId && !empty($myResumes)) {
+        $currentId = $myResumes[0]['id'];
+    }
 
-if ($currentId) {
-    $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE id=? AND user_id=?");
-    $stmt->execute([$currentId, $userId]);
-    $resume = $stmt->fetch();
-    if ($resume) {
-        $stmtEdu = $db->prepare("SELECT * FROM education WHERE resume_id=? ORDER BY sort_order");
-        $stmtEdu->execute([$currentId]); $education = $stmtEdu->fetchAll();
-        
-        $stmtExp = $db->prepare("SELECT * FROM experience WHERE resume_id=? ORDER BY sort_order");
-        $stmtExp->execute([$currentId]); $experience = $stmtExp->fetchAll();
-        
-        $stmtSkill = $db->prepare("SELECT * FROM resume_skills WHERE resume_id=? ORDER BY sort_order");
-        $stmtSkill->execute([$currentId]); $skills = $stmtSkill->fetchAll();
-        
-        $stmtProj = $db->prepare("SELECT * FROM projects WHERE resume_id=? ORDER BY sort_order");
-        $stmtProj->execute([$currentId]); $projects = $stmtProj->fetchAll();
-        
-        $stmtCert = $db->prepare("SELECT * FROM certifications WHERE resume_id=? ORDER BY sort_order");
-        $stmtCert->execute([$currentId]); $certifications = $stmtCert->fetchAll();
-        
-        $stmtAch = $db->prepare("SELECT * FROM achievements WHERE resume_id=? ORDER BY sort_order");
-        $stmtAch->execute([$currentId]); $achievements = $stmtAch->fetchAll();
+    if ($currentId) {
+        $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE id=? AND user_id=?");
+        $stmt->execute([$currentId, $userId]);
+        $resume = $stmt->fetch();
+        if ($resume) {
+            $stmtEdu = $db->prepare("SELECT * FROM education WHERE resume_id=? ORDER BY sort_order");
+            $stmtEdu->execute([$currentId]); $education = $stmtEdu->fetchAll();
+            
+            $stmtExp = $db->prepare("SELECT * FROM experience WHERE resume_id=? ORDER BY sort_order");
+            $stmtExp->execute([$currentId]); $experience = $stmtExp->fetchAll();
+            
+            $stmtSkill = $db->prepare("SELECT * FROM resume_skills WHERE resume_id=? ORDER BY sort_order");
+            $stmtSkill->execute([$currentId]); $skills = $stmtSkill->fetchAll();
+            
+            $stmtProj = $db->prepare("SELECT * FROM projects WHERE resume_id=? ORDER BY sort_order");
+            $stmtProj->execute([$currentId]); $projects = $stmtProj->fetchAll();
+            
+            $stmtCert = $db->prepare("SELECT * FROM certifications WHERE resume_id=? ORDER BY sort_order");
+            $stmtCert->execute([$currentId]); $certifications = $stmtCert->fetchAll();
+            
+            $stmtAch = $db->prepare("SELECT * FROM achievements WHERE resume_id=? ORDER BY sort_order");
+            $stmtAch->execute([$currentId]); $achievements = $stmtAch->fetchAll();
+        }
     }
 }
 
@@ -260,6 +542,14 @@ include __DIR__ . '/includes/header.php';
 
     <!-- Main Content -->
     <main class="builder-content">
+        <?php if ($isGuest): ?>
+            <div class="alert alert-info" style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border: 1px solid var(--primary);">
+                <div style="font-size:14.5px;">
+                    <strong>✨ Guest Sandbox Mode:</strong> You are customizing a trial resume. Save your progress below or register to unlock PDF downloads and ATS analysis.
+                </div>
+                <a href="register.php?trial=1" class="btn btn-primary btn-sm" style="margin:0;padding:8px 16px;">💾 Save Progress & Register</a>
+            </div>
+        <?php endif; ?>
         
         <?php if ($success): ?>
             <div class="alert alert-success" style="margin-bottom:24px;"><?= htmlspecialchars($success) ?></div>
@@ -268,32 +558,30 @@ include __DIR__ . '/includes/header.php';
             <div class="alert alert-error" style="margin-bottom:24px;"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
 
-        <?php
-        $templates = [
-            'ats' => ['emoji' => '🤖', 'label' => 'ATS Friendly', 'color' => '#10b981'],
-            'professional' => ['emoji' => '💼', 'label' => 'Professional', 'color' => '#6366f1'],
-            'modern' => ['emoji' => '✨', 'label' => 'Modern', 'color' => '#a855f7'],
-            'creative' => ['emoji' => '🎨', 'label' => 'Creative', 'color' => '#f59e0b'],
-        ];
-        ?>
-
         <?php if (!$resume): ?>
         <!-- Create New Resume -->
         <div class="card">
-            <h2 class="card-title">✏️ Create Your First Resume</h2>
+            <h2 class="card-title">✏️ <?= empty($myResumes) ? 'Create Your First Resume' : 'Create New Resume' ?></h2>
             <p style="color:var(--text-muted);margin-bottom:24px;">Choose a template and give your resume a name to get started.</p>
+            <?php
+            $preselected = 'ats';
+            if (isset($_GET['template']) && array_key_exists($_GET['template'], $templates)) {
+                $preselected = $_GET['template'];
+            }
+            $defaultTitle = 'My ' . $templates[$preselected]['label'] . ' Resume';
+            ?>
             <form method="POST">
                 <input type="hidden" name="action" value="create_resume">
                 <div class="form-group">
                     <label class="form-label">Resume Title</label>
-                    <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer Resume" value="My Resume" required>
+                    <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer Resume" value="<?= htmlspecialchars($defaultTitle) ?>" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Choose Template</label>
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:12px;margin-top:8px;">
                         <?php foreach ($templates as $key => $t): ?>
-                            <label class="template-card" style="cursor:pointer;">
-                                <input type="radio" name="template" value="<?= $key ?>" style="display:none;" <?= $key === 'ats' ? 'checked' : '' ?> onchange="document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected'));this.closest('.template-card').classList.add('selected')">
+                            <label class="template-card <?= $key === $preselected ? 'selected' : '' ?>" style="cursor:pointer;">
+                                <input type="radio" name="template" value="<?= $key ?>" style="display:none;" <?= $key === $preselected ? 'checked' : '' ?> onchange="document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected'));this.closest('.template-card').classList.add('selected')">
                                 <div style="font-size:28px;"><?= $t['emoji'] ?></div>
                                 <div class="template-label" style="color:<?= $t['color'] ?>;"><?= $t['label'] ?></div>
                             </label>
@@ -311,7 +599,7 @@ include __DIR__ . '/includes/header.php';
             <h1 style="font-size:28px;margin:0;"><?= htmlspecialchars($resume['title']) ?></h1>
             <div style="display:flex;gap:10px;">
                 <a href="resume_preview.php?id=<?= $currentId ?>" target="_blank" class="btn btn-secondary btn-sm">👁️ Preview</a>
-                <button form="resume-form" type="submit" class="btn btn-primary btn-sm">💾 Save All</button>
+                <button form="resume-form" type="submit" class="btn btn-primary btn-sm"><?= $isGuest ? '💾 Save Sandbox' : '💾 Save All' ?></button>
             </div>
         </div>
 
@@ -330,7 +618,7 @@ include __DIR__ . '/includes/header.php';
                 </div>
                 <div class="form-group">
                     <label class="form-label">Template</label>
-                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:10px;">
                         <?php foreach ($templates as $key => $t): ?>
                             <label class="template-card <?= $resume['template'] === $key ? 'selected' : '' ?>">
                                 <input type="radio" name="template" value="<?= $key ?>" style="display:none;" <?= $resume['template'] === $key ? 'checked' : '' ?> onchange="document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected'));this.closest('.template-card').classList.add('selected')">

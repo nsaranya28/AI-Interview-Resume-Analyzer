@@ -6,38 +6,63 @@ require_once __DIR__ . '/db.php';
 $userId = getCurrentUserId();
 $db = getDB();
 
-$resumeId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$resumeId = isset($_GET['id']) ? $_GET['id'] : 0;
 $shareToken = $_GET['token'] ?? null;
 
-// Load resume
-if ($shareToken) {
-    $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE share_token=? AND is_public=1");
-    $stmt->execute([$shareToken]);
-    $resume = $stmt->fetch();
-} elseif ($userId && $resumeId) {
-    requireLogin();
-    $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE id=? AND user_id=?");
-    $stmt->execute([$resumeId, $userId]);
-    $resume = $stmt->fetch();
+$resume = null;
+$education = $experience = $skills = $projects = $certs = $achievements = [];
+$languages = [];
+
+if ($resumeId === 'guest') {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $resumeData = $_SESSION['guest_resume_data'] ?? null;
+    if (!$resumeData) {
+        echo "<p>Guest sandbox data not found. Please start from the builder.</p>";
+        exit;
+    }
+    $resume = $resumeData['resume'];
+    $education = $resumeData['education'];
+    $experience = $resumeData['experience'];
+    $skills = $resumeData['skills'];
+    $projects = $resumeData['projects'];
+    $certs = $resumeData['certifications'];
+    $achievements = $resumeData['achievements'];
+    $languages = json_decode($resume['languages'] ?? '[]', true) ?: [];
+    $template = $resume['template'] ?? 'ats';
 } else {
-    requireLogin();
-    header("Location: resume_builder.php");
-    exit;
-}
+    $resumeId = intval($resumeId);
+    // Load resume
+    if ($shareToken) {
+        $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE share_token=? AND is_public=1");
+        $stmt->execute([$shareToken]);
+        $resume = $stmt->fetch();
+    } elseif ($userId && $resumeId) {
+        requireLogin();
+        $stmt = $db->prepare("SELECT * FROM resume_profiles WHERE id=? AND user_id=?");
+        $stmt->execute([$resumeId, $userId]);
+        $resume = $stmt->fetch();
+    } else {
+        requireLogin();
+        header("Location: resume_builder.php");
+        exit;
+    }
 
-if (!$resume) {
-    echo "<p>Resume not found or access denied.</p>"; exit;
-}
+    if (!$resume) {
+        echo "<p>Resume not found or access denied.</p>"; exit;
+    }
 
-$rId = $resume['id'];
-$stmtEdu = $db->prepare("SELECT * FROM education WHERE resume_id=? ORDER BY sort_order"); $stmtEdu->execute([$rId]); $education = $stmtEdu->fetchAll();
-$stmtExp = $db->prepare("SELECT * FROM experience WHERE resume_id=? ORDER BY sort_order"); $stmtExp->execute([$rId]); $experience = $stmtExp->fetchAll();
-$stmtSkill = $db->prepare("SELECT * FROM resume_skills WHERE resume_id=? ORDER BY sort_order"); $stmtSkill->execute([$rId]); $skills = $stmtSkill->fetchAll();
-$stmtProj = $db->prepare("SELECT * FROM projects WHERE resume_id=? ORDER BY sort_order"); $stmtProj->execute([$rId]); $projects = $stmtProj->fetchAll();
-$stmtCert = $db->prepare("SELECT * FROM certifications WHERE resume_id=? ORDER BY sort_order"); $stmtCert->execute([$rId]); $certs = $stmtCert->fetchAll();
-$stmtAch = $db->prepare("SELECT * FROM achievements WHERE resume_id=? ORDER BY sort_order"); $stmtAch->execute([$rId]); $achievements = $stmtAch->fetchAll();
-$languages = json_decode($resume['languages'] ?? '[]', true) ?: [];
-$template = $resume['template'] ?? 'ats';
+    $rId = $resume['id'];
+    $stmtEdu = $db->prepare("SELECT * FROM education WHERE resume_id=? ORDER BY sort_order"); $stmtEdu->execute([$rId]); $education = $stmtEdu->fetchAll();
+    $stmtExp = $db->prepare("SELECT * FROM experience WHERE resume_id=? ORDER BY sort_order"); $stmtExp->execute([$rId]); $experience = $stmtExp->fetchAll();
+    $stmtSkill = $db->prepare("SELECT * FROM resume_skills WHERE resume_id=? ORDER BY sort_order"); $stmtSkill->execute([$rId]); $skills = $stmtSkill->fetchAll();
+    $stmtProj = $db->prepare("SELECT * FROM projects WHERE resume_id=? ORDER BY sort_order"); $stmtProj->execute([$rId]); $projects = $stmtProj->fetchAll();
+    $stmtCert = $db->prepare("SELECT * FROM certifications WHERE resume_id=? ORDER BY sort_order"); $stmtCert->execute([$rId]); $certs = $stmtCert->fetchAll();
+    $stmtAch = $db->prepare("SELECT * FROM achievements WHERE resume_id=? ORDER BY sort_order"); $stmtAch->execute([$rId]); $achievements = $stmtAch->fetchAll();
+    $languages = json_decode($resume['languages'] ?? '[]', true) ?: [];
+    $template = $resume['template'] ?? 'ats';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
