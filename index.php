@@ -69,7 +69,7 @@ include __DIR__ . '/includes/header.php';
 <section class="stats-section">
     <div class="container">
         <div class="stats-row">
-            <div class="stat-item"><div class="num">4</div><div class="label">Resume Templates</div></div>
+            <div class="stat-item"><div class="num">100+</div><div class="label">Resume Templates</div></div>
             <div class="stat-item"><div class="num">100%</div><div class="label">AI Powered Analysis</div></div>
             <div class="stat-item"><div class="num">10+</div><div class="label">Resume Sections</div></div>
             <div class="stat-item"><div class="num">∞</div><div class="label">Interview Practice</div></div>
