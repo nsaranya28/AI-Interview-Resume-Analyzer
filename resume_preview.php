@@ -165,6 +165,65 @@ if ($resumeId === 'guest') {
         .tpl-creative .skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
         .tpl-creative .skill-tag { background:#dc2626; color:#ffffff; padding:4px 12px; border-radius:4px; font-size:12px; font-weight:600; }
  
+        /* ====== Minimalist Template ====== */
+        .tpl-minimal { font-family:'Inter',sans-serif; color:#2d3748; padding:40px; }
+        .tpl-minimal .header { text-align:left; border-bottom:1px solid #e2e8f0; padding-bottom:20px; margin-bottom:25px; }
+        .tpl-minimal h1 { font-size:28px; font-weight:300; letter-spacing:-0.5px; color:#1a202c; margin-bottom:6px; }
+        .tpl-minimal .headline { font-size:13px; font-weight:600; text-transform:uppercase; color:#718096; letter-spacing:1px; margin-bottom:10px; }
+        .tpl-minimal .contacts { display:flex; flex-wrap:wrap; gap:14px; font-size:11px; color:#718096; }
+        .tpl-minimal .section { margin-bottom:24px; }
+        .tpl-minimal .section-title { font-size:12px; font-weight:700; text-transform:uppercase; color:#1a202c; letter-spacing:1.5px; border-bottom:1px solid #e2e8f0; padding-bottom:4px; margin-bottom:12px; }
+        .tpl-minimal .item { margin-bottom:12px; }
+        .tpl-minimal .item-header { display:flex; justify-content:space-between; align-items:baseline; }
+        .tpl-minimal .item-title { font-size:13px; font-weight:700; color:#1a202c; }
+        .tpl-minimal .item-sub { font-size:12px; color:#718096; }
+        .tpl-minimal .item-date { font-size:11px; color:#a0aec0; }
+        .tpl-minimal .item-desc { font-size:12px; color:#4a5568; margin-top:4px; white-space:pre-line; }
+
+        /* ====== Executive Template ====== */
+        .tpl-executive { font-family:'Playfair Display','Inter',sans-serif; color:#1a1a1a; display:grid; grid-template-columns:1fr 260px; gap:30px; padding:45px; }
+        .tpl-executive .header { grid-column:1 / -1; border-bottom:3px double #991b1b; padding-bottom:20px; margin-bottom:10px; }
+        .tpl-executive h1 { font-size:36px; font-weight:700; color:#991b1b; margin-bottom:4px; }
+        .tpl-executive .headline { font-family:'Inter',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:2px; color:#4a4a4a; }
+        .tpl-executive .contacts { display:flex; gap:16px; font-size:12px; color:#666; margin-top:10px; }
+        .tpl-executive .main { display:flex; flex-direction:column; gap:20px; }
+        .tpl-executive .sidebar { background:#f9fafb; border-left:1px solid #e5e7eb; padding:20px; }
+        .tpl-executive .section { margin-bottom:20px; }
+        .tpl-executive .section-title { font-size:16px; font-weight:700; color:#991b1b; border-bottom:1px solid #991b1b; padding-bottom:4px; margin-bottom:14px; }
+        .tpl-executive .item-title { font-size:14px; font-weight:700; }
+        .tpl-executive .item-desc { font-size:12px; color:#333; line-height:1.6; white-space:pre-line; }
+
+        /* ====== Academic Template ====== */
+        .tpl-academic { font-family:Georgia, serif; color:#111; padding:50px; }
+        .tpl-academic .header { text-align:center; margin-bottom:30px; }
+        .tpl-academic h1 { font-size:28px; font-weight:normal; margin-bottom:8px; }
+        .tpl-academic .headline { font-style:italic; margin-bottom:12px; }
+        .tpl-academic .contacts { justify-content:center; display:flex; gap:14px; font-size:11px; border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding:6px 0; }
+        .tpl-academic .section { margin-bottom:24px; }
+        .tpl-academic .section-title { font-family:Georgia, serif; font-size:14px; font-weight:bold; text-transform:uppercase; border-bottom:1px solid #111; margin:20px 0 10px; padding-bottom:3px; }
+        .tpl-academic .item-desc { font-size:12.5px; color:#222; line-height:1.5; white-space:pre-line; }
+
+        /* ====== Tech Sleek Template ====== */
+        .tpl-tech_sleek { font-family:'Inter',sans-serif; color:#0f172a; padding:40px; }
+        .tpl-tech_sleek .header { background:#0f172a; color:#fff; padding:30px; border-radius:8px; margin-bottom:24px; }
+        .tpl-tech_sleek h1 { font-size:30px; font-weight:800; color:#f8fafc; }
+        .tpl-tech_sleek .headline { font-family:monospace; color:#ef4444; font-size:14px; margin-top:4px; }
+        .tpl-tech_sleek .contacts { display:flex; flex-wrap:wrap; gap:16px; font-size:11px; color:#cbd5e1; margin-top:12px; }
+        .tpl-tech_sleek .section { margin-bottom:24px; }
+        .tpl-tech_sleek .section-title { font-family:monospace; font-size:13px; color:#ef4444; border-bottom:1px solid #e2e8f0; padding-bottom:6px; margin-bottom:14px; text-transform:uppercase; }
+        .tpl-tech_sleek .tech-badge { font-family:monospace; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:4px; padding:2px 8px; font-size:11px; color:#334155; }
+        .tpl-tech_sleek .item-desc { font-size:13px; color:#334155; line-height:1.6; white-space:pre-line; }
+
+        /* ====== Elegant Template ====== */
+        .tpl-elegant { font-family:'Playfair Display', serif; color:#2d2020; padding:45px; }
+        .tpl-elegant .header { text-align:center; border-bottom:1px solid #e9d8d8; padding-bottom:20px; margin-bottom:24px; }
+        .tpl-elegant h1 { font-size:34px; color:#7f1d1d; font-weight:normal; }
+        .tpl-elegant .headline { font-family:'Inter', sans-serif; font-size:13px; text-transform:uppercase; color:#8c7a7a; letter-spacing:1px; margin-top:4px; }
+        .tpl-elegant .contacts { display:flex; justify-content:center; gap:16px; font-size:11px; color:#8c7a7a; margin-top:10px; }
+        .tpl-elegant .section { margin-bottom:24px; }
+        .tpl-elegant .section-title { font-size:16px; font-weight:bold; color:#7f1d1d; border-bottom:1px solid #e9d8d8; padding-bottom:4px; margin-bottom:12px; text-align:center; }
+        .tpl-elegant .item-desc { font-size:12.5px; color:#4a3e3e; line-height:1.6; white-space:pre-line; }
+
         @media print {
             body { background:#ffffff; padding:0; }
             .controls { display:none !important; }
@@ -318,6 +377,102 @@ if ($template === 'ats'): ?>
     </div>
 </div>
  
+<?php elseif ($template === 'minimal'): ?>
+<div class="tpl-minimal">
+    <div class="header">
+        <h1><?= $n ?></h1>
+        <?php if ($jt): ?><div class="headline"><?= $jt ?></div><?php endif; ?>
+        <div class="contacts">
+            <?php if ($em): ?><span>✉ <?= $em ?></span><?php endif; ?>
+            <?php if ($ph): ?><span>📞 <?= $ph ?></span><?php endif; ?>
+            <?php if ($ad): ?><span>📍 <?= $ad ?></span><?php endif; ?>
+            <?php if ($li): ?><span>🔗 LinkedIn</span><?php endif; ?>
+        </div>
+    </div>
+    <div class="body">
+        <?php if ($sum): ?><div class="section"><div class="section-title">Profile</div><p style="font-size:12px;line-height:1.6;color:#4a5568;"><?= $sum ?></p></div><?php endif; ?>
+        <?php if (!empty($skills)): ?><div class="section"><div class="section-title">Skills</div><div class="skills-grid"><?php foreach ($skills as $sk): ?><span class="skill-chip"><?= htmlspecialchars($sk['skill_name']) ?></span><?php endforeach; ?></div></div><?php endif; ?>
+        <?php if (!empty($experience)): ?><div class="section"><div class="section-title">Experience</div><?php foreach ($experience as $exp): ?><div class="item"><div class="item-header"><span class="item-title"><?= htmlspecialchars($exp['position']) ?> — <?= htmlspecialchars($exp['company']) ?></span><span class="item-date"><?= $exp['start_date'] ?> – <?= $exp['end_date']?:'Present' ?></span></div><?php if ($exp['description']): ?><div class="item-desc"><?= $exp['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+        <?php if (!empty($education)): ?><div class="section"><div class="section-title">Education</div><?php foreach ($education as $edu): ?><div class="item"><div class="item-header"><span class="item-title"><?= htmlspecialchars($edu['degree']) ?></span><span class="item-date"><?= $edu['start_year'] ?> – <?= $edu['end_year'] ?></span></div><div class="item-sub"><?= htmlspecialchars($edu['institution']) ?></div></div><?php endforeach; ?></div><?php endif; ?>
+        <?php if (!empty($projects)): ?><div class="section"><div class="section-title">Projects</div><?php foreach ($projects as $proj): ?><div class="item"><div class="item-title" style="font-size:13px;font-weight:700;"><?= htmlspecialchars($proj['project_name']) ?></div><?php if ($proj['description']): ?><div class="item-desc"><?= $proj['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+    </div>
+</div>
+
+<?php elseif ($template === 'executive'): ?>
+<div class="tpl-executive">
+    <div class="header">
+        <h1><?= $n ?></h1>
+        <?php if ($jt): ?><div class="headline"><?= $jt ?></div><?php endif; ?>
+        <div class="contacts">
+            <?php if ($em): ?><span>✉ <?= $em ?></span><?php endif; ?>
+            <?php if ($ph): ?><span>📞 <?= $ph ?></span><?php endif; ?>
+            <?php if ($ad): ?><span>📍 <?= $ad ?></span><?php endif; ?>
+        </div>
+    </div>
+    <div class="main">
+        <?php if ($sum): ?><div class="section"><div class="section-title">Executive Summary</div><p style="font-size:12.5px;line-height:1.65;"><?= $sum ?></p></div><?php endif; ?>
+        <?php if (!empty($experience)): ?><div class="section"><div class="section-title">Professional Experience</div><?php foreach ($experience as $exp): ?><div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;"><span><?= htmlspecialchars($exp['position']) ?></span><span><?= $exp['start_date'] ?> – <?= $exp['end_date']?:'Present' ?></span></div><div style="font-style:italic;font-size:12px;color:#444;"><?= htmlspecialchars($exp['company']) ?></div><?php if ($exp['description']): ?><div class="item-desc"><?= $exp['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+        <?php if (!empty($education)): ?><div class="section"><div class="section-title">Education</div><?php foreach ($education as $edu): ?><div style="margin-bottom:10px;"><div style="font-weight:700;font-size:13px;"><?= htmlspecialchars($edu['degree']) ?></div><div style="font-size:12px;"><?= htmlspecialchars($edu['institution']) ?> (<?= $edu['start_year'] ?> – <?= $edu['end_year'] ?>)</div></div><?php endforeach; ?></div><?php endif; ?>
+    </div>
+    <div class="sidebar">
+        <?php if (!empty($skills)): ?><div class="section"><div class="section-title">Expertise</div><div style="display:flex;flex-direction:column;gap:6px;font-size:12px;"><?php foreach ($skills as $sk): ?><div><strong><?= htmlspecialchars($sk['skill_name']) ?></strong></div><?php endforeach; ?></div></div><?php endif; ?>
+        <?php if (!empty($languages)): ?><div class="section"><div class="section-title">Languages</div><div style="font-size:12px;line-height:1.6;"><?php foreach ($languages as $l): ?><div><?= htmlspecialchars($l) ?></div><?php endforeach; ?></div></div><?php endif; ?>
+    </div>
+</div>
+
+<?php elseif ($template === 'academic'): ?>
+<div class="tpl-academic">
+    <div class="header">
+        <h1><?= $n ?></h1>
+        <?php if ($jt): ?><div class="headline"><?= $jt ?></div><?php endif; ?>
+        <div class="contacts">
+            <?php if ($em): ?><span><?= $em ?></span><?php endif; ?>
+            <?php if ($ph): ?><span><?= $ph ?></span><?php endif; ?>
+            <?php if ($ad): ?><span><?= $ad ?></span><?php endif; ?>
+        </div>
+    </div>
+    <div class="body">
+        <?php if ($sum): ?><div class="section"><div class="section-title">Research Summary</div><p style="font-size:13px;line-height:1.6;"><?= $sum ?></p></div><?php endif; ?>
+        <?php if (!empty($education)): ?><div class="section"><div class="section-title">Education</div><?php foreach ($education as $edu): ?><div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-weight:bold;font-size:13px;"><span><?= htmlspecialchars($edu['degree']) ?></span><span><?= $edu['start_year'] ?> – <?= $edu['end_year'] ?></span></div><div style="font-size:12px;"><?= htmlspecialchars($edu['institution']) ?><?php if ($edu['gpa']): ?> — GPA: <?= $edu['gpa'] ?><?php endif; ?></div></div><?php endforeach; ?></div><?php endif; ?>
+        <?php if (!empty($experience)): ?><div class="section"><div class="section-title">Professional Appointments</div><?php foreach ($experience as $exp): ?><div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-weight:bold;font-size:13px;"><span><?= htmlspecialchars($exp['position']) ?></span><span><?= $exp['start_date'] ?> – <?= $exp['end_date']?:'Present' ?></span></div><div style="font-style:italic;font-size:12px;"><?= htmlspecialchars($exp['company']) ?></div><?php if ($exp['description']): ?><div class="item-desc"><?= $exp['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+    </div>
+</div>
+
+<?php elseif ($template === 'tech_sleek'): ?>
+<div class="tpl-tech_sleek">
+    <div class="header">
+        <h1><?= $n ?></h1>
+        <?php if ($jt): ?><div class="headline">&gt; <?= $jt ?></div><?php endif; ?>
+        <div class="contacts">
+            <?php if ($em): ?><span>[email: <?= $em ?>]</span><?php endif; ?>
+            <?php if ($ph): ?><span>[phone: <?= $ph ?>]</span><?php endif; ?>
+            <?php if ($ad): ?><span>[loc: <?= $ad ?>]</span><?php endif; ?>
+        </div>
+    </div>
+    <div class="body">
+        <?php if ($sum): ?><div class="section"><div class="section-title">// profile</div><p style="font-size:12.5px;line-height:1.6;font-family:monospace;"><?= $sum ?></p></div><?php endif; ?>
+        <?php if (!empty($skills)): ?><div class="section"><div class="section-title">// tech stack</div><div style="display:flex;flex-wrap:wrap;gap:6px;"><?php foreach ($skills as $sk): ?><span class="tech-badge"><?= htmlspecialchars($sk['skill_name']) ?></span><?php endforeach; ?></div></div><?php endif; ?>
+        <?php if (!empty($experience)): ?><div class="section"><div class="section-title">// experience log</div><?php foreach ($experience as $exp): ?><div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;font-family:monospace;"><span><?= htmlspecialchars($exp['position']) ?> @ <?= htmlspecialchars($exp['company']) ?></span><span><?= $exp['start_date'] ?> - <?= $exp['end_date']?:'Present' ?></span></div><?php if ($exp['description']): ?><div class="item-desc"><?= $exp['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+    </div>
+</div>
+
+<?php elseif ($template === 'elegant'): ?>
+<div class="tpl-elegant">
+    <div class="header">
+        <h1><?= $n ?></h1>
+        <?php if ($jt): ?><div class="headline"><?= $jt ?></div><?php endif; ?>
+        <div class="contacts">
+            <?php if ($em): ?><span>✉ <?= $em ?></span><?php endif; ?>
+            <?php if ($ph): ?><span>📞 <?= $ph ?></span><?php endif; ?>
+            <?php if ($ad): ?><span>📍 <?= $ad ?></span><?php endif; ?>
+        </div>
+    </div>
+    <div class="body">
+        <?php if ($sum): ?><div class="section"><div class="section-title">Executive Profile</div><p style="font-size:13px;line-height:1.65;text-align:center;font-style:italic;"><?= $sum ?></p></div><?php endif; ?>
+        <?php if (!empty($experience)): ?><div class="section"><div class="section-title">Professional History</div><?php foreach ($experience as $exp): ?><div style="margin-bottom:14px;text-align:center;"><div style="font-size:14px;font-weight:bold;color:#7f1d1d;"><?= htmlspecialchars($exp['position']) ?></div><div style="font-size:12px;color:#555;"><?= htmlspecialchars($exp['company']) ?> | <?= $exp['start_date'] ?> – <?= $exp['end_date']?:'Present' ?></div><?php if ($exp['description']): ?><div class="item-desc" style="text-align:left;max-width:600px;margin:6px auto 0;"><?= $exp['description'] ?></div><?php endif; ?></div><?php endforeach; ?></div><?php endif; ?>
+    </div>
+</div>
+
 <?php else: // Creative ?>
 <div class="tpl-creative">
     <div class="header"><div><h1><?= $n ?></h1><div class="hl"><?= $jt ?></div></div><div class="contacts"><?php if ($em): ?>✉ <?= $em ?><br><?php endif; ?><?php if ($ph): ?>📞 <?= $ph ?><br><?php endif; ?><?php if ($ad): ?>📍 <?= $ad ?><br><?php endif; ?><?php if ($li): ?>🔗 LinkedIn<br><?php endif; ?></div></div>

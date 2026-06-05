@@ -44,6 +44,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             
             <!-- Conditional Navigation Links -->
             <nav class="nav-links">
+                <a href="<?= BASE_URL ?>templates_gallery.php" class="nav-link <?= $currentPage === 'templates_gallery.php' ? 'active' : '' ?>">Templates</a>
                 <?php if (isLoggedIn()): ?>
                     <span style="color: var(--text-muted); font-size: 14.5px; font-weight: 500;">
                         Welcome, <strong style="color: var(--text-dark); text-shadow: var(--text-glow);"><?= htmlspecialchars($_SESSION['user_name'] ?? 'User') ?></strong>
@@ -67,4 +68,3 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </nav>
         </div>
     </header>
-
